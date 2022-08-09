@@ -1,0 +1,37 @@
+{
+  "name": "@cagov/ds-benefits-recommendations-display",
+  "version": "1.0.0",
+  "description": "Retrieve and display list of recommended benefits available to Californians",
+  "main": "dist/index.js",
+  "scripts": {
+    "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
+    "build:more-args": " --minify ",
+    "build": "sass src/css/index.scss src/css/index.css && npm run build:js",
+    "cdn:publish": "node ../../docs/src/publish/cdn-deploy.js",
+    "prepublishOnly": "npm run build && npm test && npm run cdn:publish",
+    "local":"http-server",
+    "test": "web-test-runner \"test/**/*.js\" --node-resolve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cagov/benefits-recommendation-widget-front.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@open-wc/testing": "^3.0.1",
+    "@web/test-runner-playwright": "^0.8.8",
+    "esbuild": "^0.14.51",
+    "http-server": "^14.1.1",
+    "lit": "^2.0.0-rc.2",
+    "sass": "^1.54.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "bugs": {
+    "url": "https://github.com/cagov/benefits-recommendation-widget-front/issues"
+  },
+  "homepage": "https://github.com/cagov/benefits-recommendation-widget-front#readme"
+}

@@ -1,0 +1,53 @@
+/* these style rules are used inside the component shadow root so can reference generic elements without influencing the containing page */
+section {
+  background: #F2F9F7;
+  border-left: 3px solid #077E62;
+  margin: 1rem 0 0 0;
+  padding: 0 2rem 2rem 2rem;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #077E62;
+}
+
+ul.benefits {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+ul.benefits li {
+  list-style: none;
+  background: #fff;
+  flex-grow: 1;
+  max-width: 50%;
+}
+ul.benefits li a {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  text-decoration: none;
+  align-items: center;
+  color: #000;
+}
+ul.benefits li a:hover {
+  background-color: #ccc;
+}
+ul.benefits li .details {
+  display: flex;
+}
+ul.benefits li .details .offer {
+  display: flex;
+  flex-flow: column;
+  margin-left: 1rem;
+}
+ul.benefits li .details .linktext, ul.benefits li .details .program {
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=index.css.map */
