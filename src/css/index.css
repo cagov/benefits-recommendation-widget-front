@@ -26,6 +26,7 @@ ul.benefits li {
   background: #fff;
   flex-grow: 1;
   max-width: 50%;
+  min-width: 40%;
 }
 ul.benefits li a {
   display: flex;
@@ -46,8 +47,13 @@ ul.benefits li .details .offer {
   flex-flow: column;
   margin-left: 1rem;
 }
-ul.benefits li .details .linktext, ul.benefits li .details .program {
+ul.benefits li .details .linktext {
   font-weight: bold;
+}
+ul.benefits li .program {
+  font-weight: bold;
+  align-self: end;
+  text-align: right;
 }
 
 /*# sourceMappingURL=index.css.map */
