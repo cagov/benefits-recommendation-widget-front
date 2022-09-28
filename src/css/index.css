@@ -36,7 +36,7 @@ ul.benefits li a {
   color: #000;
 }
 ul.benefits li a:hover {
-  background-color: #ccc;
+  box-shadow: 0 0 23.3143px rgba(0, 0, 0, 0.25);
 }
 ul.benefits li .details {
   display: flex;
@@ -55,8 +55,8 @@ ul.benefits li .details .linktext {
 }
 ul.benefits li .program {
   font-weight: bold;
-  align-self: end;
   text-align: right;
+  margin-right: 0.3rem;
 }
 
 /*# sourceMappingURL=index.css.map */
