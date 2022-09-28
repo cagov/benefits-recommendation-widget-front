@@ -20,8 +20,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
     this.html = html;
     this.css = css;
-    this.benefitsAPI = 'http://localhost:3333/';
-    
+    this.benefitsAPI = 'https://7ksmy2xna5.execute-api.us-west-1.amazonaws.com/'
   }
 
   // respond to changed attributes
@@ -46,7 +45,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     this.widgetEnvData.income = this.income;
 
     // retrieve set of benefits links from API
-    fetch(`${this.benefitsAPI}benefits/`, {
+    fetch(`${this.benefitsAPI}benefits`, {
       headers: {
         'Content-Type': 'application/json',
       }
@@ -115,7 +114,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       delete this.widgetEnvData.linktext;
     }
     
-    fetch(`${this.benefitsAPI}event/`, {
+    fetch(`${this.benefitsAPI}event`, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
@@ -125,7 +124,8 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     })
     .then((response) => response.json())
     .then((data) => {
-    })
+      console.log(data)
+    });
   }
 
   applyListeners() {

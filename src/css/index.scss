@@ -25,15 +25,14 @@ ul.benefits {
     list-style: none;
     background: #fff;
     flex-grow: 1;
-    max-width: 50%;
-    min-width: 40%;
+    max-width: 100%;
 
     a {
       display: flex;
       justify-content: space-between;
-      padding: .5rem;
+      padding: 1.2rem;
+      font-size: 1.5rem;
       text-decoration: none;
-      align-items: center;
       color: #000;
 
       &:hover {
@@ -43,6 +42,11 @@ ul.benefits {
 
     .details {
       display: flex;
+      min-width: 60%;
+
+      .svg {
+        margin-top: .5rem;
+      }
 
       .offer {
         display: flex;

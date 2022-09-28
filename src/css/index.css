@@ -25,15 +25,14 @@ ul.benefits li {
   list-style: none;
   background: #fff;
   flex-grow: 1;
-  max-width: 50%;
-  min-width: 40%;
+  max-width: 100%;
 }
 ul.benefits li a {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 1.2rem;
+  font-size: 1.5rem;
   text-decoration: none;
-  align-items: center;
   color: #000;
 }
 ul.benefits li a:hover {
@@ -41,6 +40,10 @@ ul.benefits li a:hover {
 }
 ul.benefits li .details {
   display: flex;
+  min-width: 60%;
+}
+ul.benefits li .details .svg {
+  margin-top: 0.5rem;
 }
 ul.benefits li .details .offer {
   display: flex;

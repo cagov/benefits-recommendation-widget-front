@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+<head id="head"><title>
+Custom Error Page
+</title>
+
+<!-- head content, for all pages -->
+<meta name="Author" content="State of California" /><meta name="Description" content="State of California" /><meta name="Keywords" content="California, government" />
+<!-- Use highest compatibility mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True" />
+<!-- for Blackberry, AvantGo -->
+<meta name="MobileOptimized" content="320" />
+<!-- for Windows mobile -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet" type="text/css" />
+<!-- selectivizr.com, emulates CSS3 pseudo-classes and attribute selectors in Internet Explorer 6-8 -->
+<meta name="format-detection" content="telephone=no" /><link href="../../../App_Themes/EDDTheme/css/bootstrap-datepicker.min.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/bootstrap-datepicker3.standalone.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/cagov.core.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/cagov.font-only.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/colorscheme-oceanside.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/custom.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/processbar.css" type="text/css" rel="stylesheet" /><link href="../../../App_Themes/EDDTheme/css/uio.custom.css" type="text/css" rel="stylesheet" /></head>
+<body>
+<form method="post" action="./ResponsiveCustomErrorPage.aspx" id="frmClaimantMainNoMenu" class="d-flex flex-column min-vh-100 mb-0">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJLTM5NjAwNDc2DxQrAAQWAh4YUHJldmlvdXNQYWdlUGF0aEFuZFF1ZXJ5BTcvVUlPL1BhZ2VzL1B1YmxpYy9Db21tb24vUmVzcG9uc2l2ZUN1c3RvbUVycm9yUGFnZS5hc3B4BSQ5MmI3YjlkYy0zYjQzLTQ1MzItYWNlMy1jZGViYjBiZjM2YzMFJDMzNWExNWUyLTdhMGItNDc5Ni1iZTIwLTJkY2E3YjIxMGIzYQUkNTA1ZGRmM2UtODdkYi00ODQ0LTgyYjAtM2Y5YmIxNzBmNjI0FgJmD2QWBGYPZBYGZg9kFgJmD2QWAgIBDxYEHhVSZXNvdXJjZUNvbnRhaW5lck5hbWUFB0RlZmF1bHQeDVJlc291cmNlR3JvdXBlZAIRDxUHNy4uLy4uLy4uL0FwcF9UaGVtZXMvRUREVGhlbWUvanMvbGlicy9zZWxlY3Rpdml6ci1taW4uanMoLi4vLi4vLi4vQXBwX1RoZW1lcy9FRERUaGVtZS9mYXZpY29uLmljbyguLi8uLi8uLi9BcHBfVGhlbWVzL0VERFRoZW1lL2Zhdmljb24uaWNvKC4uLy4uLy4uL0FwcF9UaGVtZXMvRUREVGhlbWUvZmF2aWNvbi5pY28oLi4vLi4vLi4vQXBwX1RoZW1lcy9FRERUaGVtZS9mYXZpY29uLmljbyguLi8uLi8uLi9BcHBfVGhlbWVzL0VERFRoZW1lL2Zhdmljb24uaWNvKC4uLy4uLy4uL0FwcF9UaGVtZXMvRUREVGhlbWUvZmF2aWNvbi5pY29kAhMPFQI1Li4vLi4vLi4vQXBwX1RoZW1lcy9FRERUaGVtZS9qcy9saWJzL2h0bWw1c2hpdi5taW4uanMzLi4vLi4vLi4vQXBwX1RoZW1lcy9FRERUaGVtZS9qcy9saWJzL3Jlc3BvbmQubWluLmpzZAIBD2QWIgIFDxYCHgdWaXNpYmxlaGQCCQ8WBB8BBQdEZWZhdWx0HgRUZXh0BQhFREQgSG9tZWQCCw8PFgYeCVRvcGljTmFtZQUzdD1lbi1VUy9QdWJsaWMvQ29tbW9uL1Jlc3BvbnNpdmVDdXN0b21FcnJvclBhZ2UuaHRtHwEFB0RlZmF1bHQfAmVkFgJmD2QWAgIBDw8WBh8BBQdEZWZhdWx0HwQFBEhlbHAeB1Rvb2xUaXAFBEhlbHBkZAIPDw8WAh4LTmF2aWdhdGVVcmwFNX4vUGFnZXMvRXh0ZXJuYWxVc2VyL1dlYkNvcnJlc3BvbmRlbmNlL0NvbnRhY3RVcy5hc3B4ZGQCEQ8PFgwfBAUHTG9nIE91dB8BBQdEZWZhdWx0HwJlHhNFbmFibGVBdXRob3JpemF0aW9uZx4aQXNzb2NpYXRlZFNlY3VyaXR5UmVzb3VyY2UFQUVERC5DQ1IuVXNlckludGVyZmFjZS5QYWdlcy5QdWJsaWMuQ3VzdG9tRXJyb3JQYWdlLmNtZExvZ2luTG9nb3V0HwNnZGQCGQ8PFgIfCGhkFgQCAw9kFgICAQ9kFgYCAQ8PFgofAgUTTGFiZWxfRXJyb3JPY2N1cnJlZB8IaB8BBQdEZWZhdWx0HwQFDkVycm9yIE9jY3VycmVkHwZlZGQCAw8PFgIfA2hkZAIFDw8WAh8DaGRkAgUPZBYGAgEPDxYIHwQFaEZvciBzZWN1cml0eSBwdXJwb3NlcywgdGhlIOKAmEJhY2vigJkgb3Ig4oCYUmVmcmVzaOKAmSBmdW5jdGlvbmFsaXR5IGhhcyBiZWVuIGRpc2FibGVkIHdpdGhpbiBVSSBPbmxpbmUuHwhoHwEFB0RlZmF1bHQfAmVkZAIDDw8WCh8IZx8JBVJFREQuQ0NSLlVzZXJJbnRlcmZhY2UuUGFnZXMuUHVibGljLkN1c3RvbUVycm9yUGFnZS5jb250ZW50TWFpbl9idG5SZXR1cm50b1VJT25saW5lHwEFB0RlZmF1bHQfBAUTUmV0dXJuIHRvIFVJIE9ubGluZR8GZWRkAgUPDxYCHwNoZGQCGw9kFgICAQ9kFgoCAQ8WBB8BBQdEZWZhdWx0HwQFC0JhY2sgdG8gVG9wZAIDDxYCHgdkYXRhLWlkBS9odHRwOi8vd3d3LmVkZC5jYS5nb3YvQWJvdXRfRUREL0NvbnRhY3RfRURELmh0bRYCAgEPDxYIHwhoHwEFB0RlZmF1bHQfBAULQ29udGFjdCBFREQfBmVkZAIFDxYCHwoFNWh0dHA6Ly93d3cuZWRkLmNhLmdvdi9BYm91dF9FREQvQ29uZGl0aW9uc19PZl9Vc2UuaHRtFgICAQ8PFggfCGgfAQUHRGVmYXVsdB8EBRFDb25kaXRpb25zIG9mIFVzZR8GZWRkAgcPFgIfCgUyaHR0cDovL3d3dy5lZGQuY2EuZ292L0Fib3V0X0VERC9Qcml2YWN5X1BvbGljeS5odG0WAgIBDw8WCB8IaB8BBQdEZWZhdWx0HwQFDlByaXZhY3kgUG9saWN5HwZlZGQCCQ8WAh8KBTFodHRwOi8vd3d3LmVkZC5jYS5nb3YvQWJvdXRfRUREL0FjY2Vzc2liaWxpdHkuaHRtFgICAQ8PFggfCGgfAQUHRGVmYXVsdB8EBQ1BY2Nlc3NpYmlsaXR5HwZlZGQCHQ8WBB8BBQdEZWZhdWx0HwJlZAIfDxYEHwEFB0RlZmF1bHQfBAUSQ29uZmlybSBOYXZpZ2F0aW9uZAIhDxYEHwEFB0RlZmF1bHQfBAWHAVlvdSBhcmUgb3BlbmluZyBhIG5ldyB0YWIgb3V0c2lkZSBvZiB0aGUgYXBwbGljYXRpb24uICBTZWxlY3QgQ29udGludWUgdG8gb3BlbiBhIG5ldyB0YWIgb3Igc2VsZWN0IENhbmNlbCB0byByZXR1cm4gdG8gdGhlIGFwcGxpY2F0aW9uLmQCIw8WAh4FdmFsdWUFBkNhbmNlbGQCJQ8WAh8LBQhDb250aW51ZWQCJw8WBB8BBQdEZWZhdWx0HwQFDlVJIE9ubGluZSBIZWxwZAIpDxYCHwsFBUNsb3NlZAIrDxYEHwEFB0RlZmF1bHQfBAUOVUkgT25saW5lIEhlbHBkAi0PFgIfCwUFQ2xvc2VkAi8PZBYIAgEPFgQfAQUHRGVmYXVsdB8EBRlBdXRvbWF0aWMgTG9nIE91dCBXYXJuaW5nZAIDDxYGHwQF0wFEdWUgdG8gaW5hY3Rpdml0eSwgeW91ciBVSSBPbmxpbmUgc2Vzc2lvbiBpcyBhYm91dCB0byBleHBpcmUuIFNlbGVjdCA8c3Ryb25nPlllczwvc3Ryb25nPiB0byBjb250aW51ZSB1c2luZyBVSSBPbmxpbmUgb3Igc2VsZWN0IDxzdHJvbmc+Tm88L3N0cm9uZz4gdG8gZW5kIHlvdXIgc2Vzc2lvbiBhbmQgbG9nIG91dC4gQW55IHVuc2F2ZWQgZGF0YSB3aWxsIGJlIGxvc3QuHwEFB0RlZmF1bHQfAmVkAgUPDxYMHwQFAk5vHg1PbkNsaWVudENsaWNrBUVMb2dvdXRTZXNzaW9uKCcvVUlPL1BhZ2VzL1B1YmxpYy9Mb2dvdXQuYXNweD9zdGF0dXM9QVVUT01BVElDTE9HT1VUJykfBmUfCGcfCQVYRURELkNDUi5Vc2VySW50ZXJmYWNlLlBhZ2VzLlB1YmxpYy5DdXN0b21FcnJvclBhZ2UuTW9kYWxTZXNzaW9uVGltZW91dE5vdGlmaWNhdGlvbl9jbWRObx8BBQdEZWZhdWx0ZGQCBw8PFgofBAUDWWVzHwZlHwhnHwkFWUVERC5DQ1IuVXNlckludGVyZmFjZS5QYWdlcy5QdWJsaWMuQ3VzdG9tRXJyb3JQYWdlLk1vZGFsU2Vzc2lvblRpbWVvdXROb3RpZmljYXRpb25fY21kWWVzHwEFB0RlZmF1bHRkZBgBBQ5jdGwwMCRtdkZvb3Rlcg8PZAIBZGXV+yp/+9ukQNLJahYs+JMMNuud" />
+</div>
+<script src="/UIO/WebResource.axd?d=jgDg3PxQFXn27skqldh3pWZHrU7f1tDm5HJJYYenrZ2arlAqp08sGeEzbqFjj7ao5DgnWnwNBG_4ecyN9jPYCoY1-ms1&amp;t=637814365746327080" type="text/javascript"></script>
+<script src="/UIO/WebResource.axd?d=nYs2H4wAXRPyS30xiooo4oM9Wy8vyrjxgufD9KDyxAeq1deL68YFgRluHCrQtDpHxse8Y0chs33OAL0e4k-dpKBdUADn9jvTou6QcLe3fkO52K7P89RI1RUEhIqwDhQCAT9I1DGHRA0jtO73_o3f0q4wIByLNGDK-VlpRy5qggU61omZ0&amp;t=637922800660000000" type="text/javascript"></script>
+<script src="/UIO/WebResource.axd?d=X2aB1rXlEmh1owNal-Evc-XwZM2SvPVQyh-ETyX1AY4oD95ojtdgTEUxPrrodglhEsyKD5lT8mbUaNnEoy_Xw1X7JQzTyT8RdgFYobPz_EBDSqdUuTX11EPfGPoc-LRplq124sx7rr1bNp9UDuUQZOJEFf41&amp;t=637922800660000000" type="text/javascript"></script>
+<script src="/UIO/WebResource.axd?d=J0cpNzMgjRg3ExaVbejQJ6Wn9h6hwWKCc40O_3XUUhY6B99bGkdm7DLSRed58szLYm_ZRJ2Z3TG1AashXvJMJg_nSZXgHui2P9vstx0M0Nhb62ayiVqLABPHxYG00h0FgWBET3Rbx2tOiFPQuYf13IfBEtWParzp4lFid4LCeBCvhb3a0&amp;t=637922800660000000" type="text/javascript"></script>
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="0683D8DF" />
+<input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0" />
+<input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAxbyKkN4WC5j0s5x59aCZNqRLN6bjMq03b1EbeSBA9K5zcT8QP3SR/l++k1dyeY1LvH70E7d4JafKd82kyzpaXbCQEgYxKrUiadYPedZVzIzM+RIU9syow9qOHkN2Drx3FfpoyIDP4f4thP4LTS2H5Q2Z+Pid9Qdm85S9glic5i3UX8txnQ8G2fSt21xmrD4FWoaautPaoyBeHVA7d6ykZgdfmT10Q18rFE3ncf6jcVzfakXvyM+axVo57LnXOt6v2EV7r9BdtxUnUG4kvRGdogOegE0g==" />
+</div>
+<input type="hidden" name="ctl00$HiddenField1" id="HiddenField1" value="Edit" />
+<input type="hidden" name="ctl00$hdnIsResponsive" id="hdnIsResponsive" value="true" />
+<a name="top"></a>
+<header role="banner" id="header" class="global-header fixed">
+<div id="skip-to-content"><a href="#main-content">Skip to Main Content</a></div>
+<!-- Alert Banner -->
+<!-- Location Setting -->
+<div class="location-settings section section-standout collapse collapsed " id="locationSettings">
+<div class="container p-y">
+<button type="button" class="close" data-toggle="collapse" data-target="#locationSettings" aria-expanded="false" aria-controls="locationSettings" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+<div class="form-group form-inline">
+<label for="locationZipCode">
+Saving your location allows us to provide you with more relevant information.</label>
+<input type="input" class="form-control" id="locationZipCode" placeholder="Zip Code">
+<button type="button" class="btn btn-primary">
+Set Location</button>
+</div>
+</div>
+</div>
+<!-- Utility Header -->
+<div class="utility-header">
+<div class="container">
+<div class="group flex-row">
+<div class="social-media-links">
+<div class="header-cagov-logo">
+<a class="NavigationURL" data-id="http://ca.gov" title = "CA.Gov" href="#main-contents" data-target="#navigationModal" data-toggle="modal">
+<img src="../../../App_Themes/EDDTheme/images/Ca-Gov-Logo-Gold.svg" alt="CA.Gov logo" class="pos-rel" title="CA.Gov" />
+</a>
+</div>
+</div>
+<div class="settings-links">
+<a class="NavigationURL" data-id="http://edd.ca.gov" href="#main-content" data-target="#navigationModal" data-toggle="modal">      
+EDD Home
+</a>
+<span onclick="javascript:DisplayHelpInNewWindow(this);__doPostBack('ctl00$cshPageHelp','cshPageHelp');" id="cshPageHelp" role="button" data-aria="Label_Help_Text"><span>
+<a href="#"><span title="Help" title="Help">Help</span></a>
+</span></span>
+<a id="cmdLoginLogout" href="javascript:__doPostBack(&#39;ctl00$cmdLoginLogout&#39;,&#39;&#39;)">Log Out</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Setting Bar -->
+<div class="site-settings section section-standout collapse collapsed" role="alert" id="siteSettings">
+<div class="container  p-y">
+<button type="button" class="close" data-toggle="collapse" data-target="#siteSettings" aria-expanded="false" aria-controls="siteSettings" aria-label="Close">
+<span aria-hidden="true">&times;</span></button>
+<div class="btn-group btn-group-justified-sm" role="group" aria-label="contrastMode">
+<div class="btn-group">
+<button type="button" class="btn btn-standout disableHighContrastMode">
+Default</button></div>
+<div class="btn-group">
+<button type="button" class="btn btn-standout enableHighContrastMode">
+High Contrast</button></div>
+</div>
+<div class="btn-group" role="group" aria-label="textSizeMode">
+<div class="btn-group">
+<button type="button" class="btn btn-standout resetTextSize">
+Reset</button></div>
+<div class="btn-group">
+<button type="button" class="btn btn-standout increaseTextSize">
+<span class="hidden-xs">Increase Font Size</span><span class="visible-xs">Font <small class="ca-gov-icon-plus-line"></small></span>
+</button>
+</div>
+<div class="btn-group">
+<button type="button" class="btn btn-standout decreaseTextSize">
+<span class="hidden-xs">Decrease Font Size</span><span class="visible-xs">Font <small class="ca-gov-icon-minus-line"></small></span>
+</button>
+</div>
+</div>
+<!-- <button type="button" class="btn btn-primary clipboard-activeonhover">Save links on hover</button> -->
+</div>
+</div>
+<!-- header branding -->
+<div class="branding">
+<div class="header-organization-banner">
+<a class="NavigationURL" data-id="http://edd.ca.gov" title = "Welcome to the Employment Development Department" href="#main-content" 
+data-target="#navigationModal" data-toggle="modal">
+<img src="../../../App_Themes/EDDTheme/images/edd-logo-2-Color.svg" id="cmdLogoCA" alt="Employment Development Department homepage." />&nbsp;
+</a>				
+</div>
+</div>
+<!-- mobile navigation controls -->
+<div class="mobile-controls"></div>
+<div class="navigation-search">
+<div id="head-search" class="search-container">
+<!-- Include Search -->
+</div>
+<!-- Include Navigation -->
+<!-- 
+Step 2
+Select Navigation Type:
+Options are: megadropdown dropdown singlelevel
+-->
+<nav id="navigation" class="main-navigation dropdown">
+</nav>
+</div>
+<div class="header-decoration"></div>
+</header>
+<div id="main-content" class="main-content">
+<div class="container">
+<main role="main" class="main-primary">
+<div id="pnlSkipContent">
+<input type="hidden" name="ctl00$hdnDisplayMode" id="hdnDisplayMode" value="Edit" />
+<div class="section section-auto">
+<h1>
+<span title="" id="pageTitle_ucScreen_lblHeader">Error Occurred</span>
+</h1>
+</div>
+<p>
+<span title="" id="contentMain_lblGenericErrorMessage">For security purposes, the ‘Back’ or ‘Refresh’ functionality has been disabled within UI Online.</span>
+</p>
+<div class="btn-row m-t-lg">
+<input type="submit" name="ctl00$contentMain$btnReturntoUIOnline" value="Return to UI Online" onclick="javascript:return DisableMulticlick();" id="contentMain_btnReturntoUIOnline" class="btn btn-primary standard-button" />
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- Global Footer -->
+<footer id="footer" class="global-footer m-t">
+<div class="container">
+<div class="footer-links">
+<div id="PageNavigation">
+<ul class="footer-links"><li>
+<a href="#skip-to-content">
+Back to Top
+</a>
+</li>
+<li>
+<a href="../../../Shared/MasterPages/EDDTemplate/#main-content" id="ContactEDD" class="NavigationURL" data-target="#navigationModal" data-toggle="modal" data-id="http://www.edd.ca.gov/About_EDD/Contact_EDD.htm"><span title="" id="cmdContactEDD">Contact EDD</span>
+</a>
+</li>
+<li>
+<a href="../../../Shared/MasterPages/EDDTemplate/#main-content" id="ConditionsofUse" class="NavigationURL" data-target="#navigationModal" data-toggle="modal" data-id="http://www.edd.ca.gov/About_EDD/Conditions_Of_Use.htm"><span title="" id="cmdConditionsofUse">Conditions of Use</span>
+</a>
+</li>
+<li>
+<a href="../../../Shared/MasterPages/EDDTemplate/#main-content" id="PrivacyPolicy" class="NavigationURL" data-target="#navigationModal" data-toggle="modal" data-id="http://www.edd.ca.gov/About_EDD/Privacy_Policy.htm">
+<span title="" id="cmdPrivacyPolicy">Privacy Policy</span>
+</a>
+</li>
+<li>
+<a href="../../../Shared/MasterPages/EDDTemplate/#main-content" id="Accessibility" class="NavigationURL" data-target="#navigationModal" data-toggle="modal" data-id="http://www.edd.ca.gov/About_EDD/Accessibility.htm"><span title="" id="cmdAccessibility">Accessibility</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Copyright Statement -->
+<div id="copyright" class="copyright">
+<div class="container">
+<div class="group">
+<div class="half">
+Copyright ©
+<script>							document.write(new Date().getFullYear())</script>
+State of California
+</div>	
+<div class="half">
+<p>
+</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!--Navigation Modal Popup -->
+<div id="navigationModal" class="modal fade" aria-hidden="true" role="dialog" aria-labelledby="navigationModalLabel" aria-describedby="navigationModalDescription" tabindex="-1">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h2 id="navigationModalLabel" class="modal-title" tabindex="0">
+<span class="ca-gov-icon-info"></span>
+Confirm Navigation
+</h2>
+<button class="close" data-dismiss="modal" type="button" aria-label="Close Dialog">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<div class="modal-body" id="navigationModalDescription">
+<p>
+You are opening a new tab outside of the application.  Select Continue to open a new tab or select Cancel to return to the application.
+</p>
+</div>
+<div class="modal-footer">
+<input name="ctl00$btnNavigateCancel" type="button" id="btnNavigateCancel" class="btn btn-secondary" data-dismiss="modal" value="Cancel" />
+<input name="ctl00$btnNavigateContinue" type="button" id="btnNavigateContinue" class="btn btn-secondary" value="Continue" />
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="helpModal" role="dialog" aria-hidden="true" tabindex="-1" aria-labelledby="helpModalTitle">
+<div class="modal-dialog modal-dialog-centered modal-help-width" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h2 class="modal-title" id="helpModalTitle">
+UI Online Help
+</h2>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close Dialog">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<div id="helpModalBody" class="modal-body">
+</div>
+<div class="modal-footer">
+<input name="ctl00$btnHelpClose" type="button" id="btnHelpClose" class="button btn btn-primary standard-button" data-dismiss="modal" value="Close" />
+</div>
+</div>
+</div>
+</div>
+<div class="modal fade" id="helpModalWithIndex" role="dialog" aria-hidden="true" tabindex="-1" aria-labelledby="helpModalWithIndexTitle">
+<div class="modal-dialog modal-dialog-centered modal-help-width" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h2 class="modal-title" id="helpModalWithIndexTitle">
+UI Online Help
+</h2>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close Dialog">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<div id="helpModalBodyWithIndex" class="modal-body">
+</div>
+<div class="modal-footer">
+<input name="ctl00$btnHelpWithIndexClose" type="button" id="btnHelpWithIndexClose" class="button btn btn-primary standard-button" data-dismiss="modal" value="Close" />
+</div>
+</div>
+</div>
+</div>
+<!-- Extra Decorative Content -->
+<div class="decoration-last">&nbsp;</div>
+<div class="modal fade" id="timeoutModal" tabindex="-1" role="dialog" aria-labelledby="timeoutModalTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h2 class="modal-title" id="timeoutModalTitle">
+Automatic Log Out Warning
+</h2>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close Dialog">
+<span aria-hidden="true">×</span>
+</button>
+</div>
+<div class="modal-body">
+<p>Due to inactivity, your UI Online session is about to expire. Select <strong>Yes</strong> to continue using UI Online or select <strong>No</strong> to end your session and log out. Any unsaved data will be lost.</p>
+</div>
+<div class="modal-footer">
+<input type="submit" name="ctl00$ModalSessionTimeoutNotification$cmdNo" value="No" onclick="LogoutSession(&#39;/UIO/Pages/Public/Logout.aspx?status=AUTOMATICLOGOUT&#39;);javascript:return DisableMulticlick();" id="ModalSessionTimeoutNotification_cmdNo" class="btn btn-secondary standard-button" data-dismiss="modal" />
+<input type="submit" name="ctl00$ModalSessionTimeoutNotification$cmdYes" value="Yes" onclick="ResetSessionTimer();return false;javascript:return DisableMulticlick();" id="ModalSessionTimeoutNotification_cmdYes" class="btn btn-primary standard-button" data-dismiss="modal" /></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+function ResetSessionTimer() {
+ResetSessionTimers();
+$("#timeoutModal").modal("hide");
+}
+function ShowSessionTimeoutNotification() {
+$("#timeoutModal").modal("show");
+}
+</script>
+<script type="text/javascript">
+//<![CDATA[
+javascript:SetupSessionTimeoutNotification('1500000','1800000','/UIO/Pages/Public/Logout.aspx','/UIO/Pages/Public/Common/SessionTimeoutNotification.aspx');
+theForm.oldSubmit = theForm.submit;
+theForm.submit = WebForm_SaveScrollPositionSubmit;
+theForm.oldOnSubmit = theForm.onsubmit;
+theForm.onsubmit = WebForm_SaveScrollPositionOnSubmit;
+//]]>
+</script>
+</form>
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/libs/jquery.js"></script>
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/libs/jquery-migrate-3.0.1.js"></script>
+<script type="text/javascript" src="../../../scripts/scripts.js"></script>
+</body>
+<!-- Load template core -->
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/cagov.core.js"></script>
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/bootstrap-datepicker.es.min.js"></script>
+<script type="text/javascript" src="../../../App_Themes/EDDTheme/js/uio.custom.js"></script>
+</html>
+<!--Added processBar.js-->
+<script type="text/javascript">
+/*  (function () {//self invoking function so we don't pollute the global name space
+var x = document.getElementsByClassName('groupItem'); //targets elements with the class "groupItem"
+for (var i = 0, max = x.length; i < max; i++) { //runs through all the elements with the class groupItems
+x[i].setAttribute("style", "width:" + 100 / x.length + "%"); //changes the width of the elements so that they fit
+}
+function hasClass(element, cls) {//element = test element, cls = class to test for
+return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+for (var i = 0, max = x.length; i < max; i++) {//this loop is looking for elements that are before active
+if (hasClass(x[i], "active")) {//Does the current element have the class of active? If so, stop, else continue
+break;
+}
+x[i].className += " complete"; //since this element is before active, its complete so add the class complete
+}
+})();
+/*!
+* Clamp.js 0.5.1
+*
+* Copyright 2011-2013, Joseph Schmitt http://joe.sh
+* Released under the WTFPL license
+* http://sam.zoy.org/wtfpl/
+*/
+(function () {
+window.$clamp = function (c, d) {
+function s(a, b) { n.getComputedStyle || (n.getComputedStyle = function (a, b) { this.el = a; this.getPropertyValue = function (b) { var c = /(\-([a-z]){1})/g; "float" == b && (b = "styleFloat"); c.test(b) && (b = b.replace(c, function (a, b, c) { return c.toUpperCase() })); return a.currentStyle && a.currentStyle[b] ? a.currentStyle[b] : null }; return this }); return n.getComputedStyle(a, null).getPropertyValue(b) } function t(a) { a = a || c.clientHeight; var b = u(c); return Math.max(Math.floor(a / b), 0) } function x(a) {
+return u(c) * a
+} function u(a) { var b = s(a, "line-height"); "normal" == b && (b = 1.2 * parseInt(s(a, "font-size"))); return parseInt(b) } function l(a) { if (a.lastChild.children && 0 < a.lastChild.children.length) return l(Array.prototype.slice.call(a.children).pop()); if (a.lastChild && a.lastChild.nodeValue && "" != a.lastChild.nodeValue && a.lastChild.nodeValue != b.truncationChar) return a.lastChild; a.lastChild.parentNode.removeChild(a.lastChild); return l(c) } function p(a, d) {
+if (d) {
+var e = a.nodeValue.replace(b.truncationChar, ""); f || (h = 0 < k.length ? k.shift() : "", f = e.split(h)); 1 < f.length ? (q = f.pop(), r(a, f.join(h))) : f = null; m && (a.nodeValue = a.nodeValue.replace(b.truncationChar, ""), c.innerHTML = a.nodeValue + " " + m.innerHTML + b.truncationChar); if (f) { if (c.clientHeight <= d) if (0 <= k.length && "" != h) r(a, f.join(h) + h + q), f = null; else return c.innerHTML } else "" == h && (r(a, ""), a = l(c), k = b.splitOnChars.slice(0), h = k[0], q = f = null); if (b.animate) setTimeout(function () { p(a, d) }, !0 === b.animate ? 10 : b.animate); else return p(a, d)
+}
+} function r(a, c) { a.nodeValue = c + b.truncationChar } d = d || {};
+var n = window, b = { clamp: d.clamp || 2, useNativeClamp: "undefined" != typeof d.useNativeClamp ? d.useNativeClamp : !0, splitOnChars: d.splitOnChars || [".", "-", "\u2013", "\u2014", " "], animate: d.animate || !1, truncationChar: d.truncationChar || "\u2026", truncationHTML: d.truncationHTML }, e = c.style, y = c.innerHTML, z = "undefined" != typeof c.style.webkitLineClamp, g = b.clamp, v = g.indexOf && (-1 < g.indexOf("px") || -1 < g.indexOf("em")), m; b.truncationHTML && (m = document.createElement("span"), m.innerHTML = b.truncationHTML); var k = b.splitOnChars.slice(0), h = k[0], f, q; "auto" == g ? g = t() : v && (g = t(parseInt(g))); var w; z && b.useNativeClamp ? (e.overflow = "hidden", e.textOverflow = "ellipsis", e.webkitBoxOrient = "vertical", e.display = "-webkit-box", e.webkitLineClamp = g, v && (e.height = b.clamp + "px")) : (e = x(g), e <= c.clientHeight && (w = p(l(c), e))); return { original: y, clamped: w }
+}
+})();
+/**********************
+Everything below is custom code for CA.gov
+***********************/
+(function () {//self invoking function so we don't pollute the global name space
+var x = document.querySelectorAll('.groupItem'); //targets elements with the class "groupItem"
+for (var i = 0, max = x.length; i < max; i++) { //runs through all the elements with the class groupItems
+x[i].setAttribute("style", "width:" + 100 / x.length + "%"); //changes the width of the elements so that they fit
+}
+function hasClass(element, cls) {//element = test element, cls = class to test for
+return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+}
+for (var i = 0, max = x.length; i < max; i++) {//this loop is looking for elements that are before active
+if (hasClass(x[i], "active")) {//Does the current element have the class of active? If so, stop, else continue
+break;
+}
+x[i].className += " complete"; //since this element is before active, its complete so add the class complete
+}
+//This is code to add ellipsis for when the detail span is too long.
+var y = document.getElementsByClassName('detail'); //this finds all the detail spans
+for (var i = 0, max = y.length; i < max; i++) {//loops through all the detail spans to add code to each one
+$clamp(y[i], { clamp: 2 }); //uses clamp.js to add ellipsises to content that is more then 2 lines long.
+}
+})();
+</script>
+<script id="f5_cspm">(function(){var f5_cspm={f5_p:'NODHLEKKIHGOBAILJEKNDKFOAAFMHBBLKHLJDODOMMMEHKMOGAHFAPKAAHCJDFALMPKBDNOLDLJHGBCLPKPAFOOCAAPKILGPKJKCABIFOAMFKIMJJBBBIECGGHOKMPBD',setCharAt:function(str,index,chr){if(index>str.length-1)return str;return str.substr(0,index)+chr+str.substr(index+1);},get_byte:function(str,i){var s=(i/16)|0;i=(i&15);s=s*32;return((str.charCodeAt(i+16+s)-65)<<4)|(str.charCodeAt(i+s)-65);},set_byte:function(str,i,b){var s=(i/16)|0;i=(i&15);s=s*32;str=f5_cspm.setCharAt(str,(i+16+s),String.fromCharCode((b>>4)+65));str=f5_cspm.setCharAt(str,(i+s),String.fromCharCode((b&15)+65));return str;},set_latency:function(str,latency){latency=latency&0xffff;str=f5_cspm.set_byte(str,40,(latency>>8));str=f5_cspm.set_byte(str,41,(latency&0xff));str=f5_cspm.set_byte(str,35,2);return str;},wait_perf_data:function(){try{var wp=window.performance.timing;if(wp.loadEventEnd>0){var res=wp.loadEventEnd-wp.navigationStart;if(res<60001){var cookie_val=f5_cspm.set_latency(f5_cspm.f5_p,res);window.document.cookie='f5avr0614933651aaaaaaaaaaaaaaaa_cspm_='+encodeURIComponent(cookie_val)+';path=/';}
+return;}}
+catch(err){return;}
+setTimeout(f5_cspm.wait_perf_data,100);return;},go:function(){var chunk=window.document.cookie.split(/\s*;\s*/);for(var i=0;i<chunk.length;++i){var pair=chunk[i].split(/\s*=\s*/);if(pair[0]=='f5_cspm'&&pair[1]=='1234')
+{var d=new Date();d.setTime(d.getTime()-1000);window.document.cookie='f5_cspm=;expires='+d.toUTCString()+';path=/;';setTimeout(f5_cspm.wait_perf_data,100);}}}}
+f5_cspm.go();}());</script>
