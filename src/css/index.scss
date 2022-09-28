@@ -58,10 +58,18 @@ ul.benefits {
         font-weight: bold;
       }
     }
-    .program {
-      font-weight: bold;
-      text-align: right;
-      margin-right: 0.3rem;
+    .program-caret {
+      display: flex;
+
+      .program {
+        font-weight: bold;
+        text-align: right;
+        margin-right: 0.3rem;
+      }
+      .caret {
+        align-self: start;
+        margin: -0.1rem 0 0 0.3rem;
+      }
     }
   }
 }
