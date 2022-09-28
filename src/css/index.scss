@@ -31,7 +31,6 @@ ul.benefits {
       display: flex;
       justify-content: space-between;
       padding: 1.2rem;
-      font-size: 1.5rem;
       text-decoration: none;
       color: #000;
 
@@ -42,7 +41,7 @@ ul.benefits {
 
     .details {
       display: flex;
-      min-width: 60%;
+      min-width: 69%;
 
       .svg {
         margin-top: .5rem;
@@ -68,7 +67,6 @@ ul.benefits {
       }
       .caret {
         align-self: start;
-        margin: -0.1rem 0 0 0.3rem;
       }
     }
   }
