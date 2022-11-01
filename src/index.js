@@ -20,7 +20,10 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
     this.html = html;
     this.css = css;
-    this.benefitsAPI = 'https://7ksmy2xna5.execute-api.us-west-1.amazonaws.com/'
+    // staging
+    // this.benefitsAPI = 'https://7ksmy2xna5.execute-api.us-west-1.amazonaws.com/';
+    // production
+    this.benefitsAPI = 'https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/'
   }
 
   // respond to changed attributes

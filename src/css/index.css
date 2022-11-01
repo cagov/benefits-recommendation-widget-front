@@ -1,7 +1,7 @@
 /* these style rules are used inside the component shadow root so can reference generic elements without influencing the containing page */
 section {
-  background: #F2F9F7;
-  border-left: 3px solid #077E62;
+  background: #E1F1EE;
+  border-left: 3px solid #006C58;
   margin: 1rem 0 0 0;
   padding: 0 2rem 2rem 2rem;
   display: inline-block;
@@ -31,7 +31,6 @@ ul.benefits li a {
   display: flex;
   justify-content: space-between;
   padding: 1.2rem;
-  font-size: 1.5rem;
   text-decoration: none;
   color: #000;
 }
@@ -40,10 +39,10 @@ ul.benefits li a:hover {
 }
 ul.benefits li .details {
   display: flex;
-  min-width: 60%;
+  min-width: 69%;
 }
 ul.benefits li .details .svg {
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
 }
 ul.benefits li .details .offer {
   display: flex;
@@ -53,10 +52,16 @@ ul.benefits li .details .offer {
 ul.benefits li .details .linktext {
   font-weight: bold;
 }
-ul.benefits li .program {
+ul.benefits li .program-caret {
+  display: flex;
+}
+ul.benefits li .program-caret .program {
   font-weight: bold;
   text-align: right;
   margin-right: 0.3rem;
+}
+ul.benefits li .program-caret .caret {
+  align-self: start;
 }
 
 /*# sourceMappingURL=index.css.map */
