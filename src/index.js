@@ -139,12 +139,9 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     let benefitsLinks = this.shadowRoot.querySelectorAll('ul.benefits a');
     benefitsLinks.forEach(link => {
       link.addEventListener('click', event => {
-        event.preventDefault();
         this.recordEvent('click', event.target.closest('a').href,  event.target.innerText.trim());
       })
     })
-
-    // report back when it reached viewable part of screen
   }
 
 }
