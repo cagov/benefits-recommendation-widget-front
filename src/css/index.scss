@@ -1,7 +1,7 @@
 /* these style rules are used inside the component shadow root so can reference generic elements without influencing the containing page */
 section {
-  background: #E1F1EE;
-  border-left: 3px solid #006C58;
+  background: #e1f1ee;
+  border-left: 3px solid #006c58;
   margin: 1rem 0 0 0;
   padding: 0 2rem 2rem 2rem;
   display: inline-block;
@@ -10,7 +10,7 @@ section {
 }
 
 h2 {
-  color: #077E62;
+  color: #077e62;
 }
 
 ul.benefits {
@@ -44,7 +44,7 @@ ul.benefits {
       min-width: 69%;
 
       .svg {
-        margin-top: .3rem;
+        margin-top: 0.3rem;
       }
 
       .offer {
@@ -64,10 +64,18 @@ ul.benefits {
         font-weight: bold;
         text-align: right;
         margin-right: 0.3rem;
+        flex-grow: 2;
       }
       .caret {
         align-self: start;
+        margin-top: 6px;
       }
     }
+  }
+}
+
+@media (max-width: 500px) {
+  ul.benefits li a {
+    flex-flow: column;
   }
 }
