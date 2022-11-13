@@ -55,7 +55,6 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       // if i receive no info from the api do nothing
       if(json.links && json.links.length > 1) {
 
-
         // create template from imported html
         let template = document.createElement('template');
         template.innerHTML = this.html;
@@ -75,7 +74,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
           // the classnames used here are inside a shadow root so can be generic as they won't inherit rules applied to the same name outside this component's shadow DOM
           listContainer.innerHTML += `
             <li>
-              <a href="${link.url}">
+              <a href="${link.url}" target="_blank" rel="noopener noreferrer">
                 <span class="details">
                   <span class="svg">${link.graphic}</span>
                   <span class="offer">
