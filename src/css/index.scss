@@ -42,6 +42,7 @@ ul.benefits {
     .details {
       display: flex;
       min-width: 69%;
+      align-items: center;
 
       .svg {
         margin-top: 0.3rem;
@@ -59,16 +60,13 @@ ul.benefits {
     }
     .program-caret {
       display: flex;
+      align-items: center;
 
       .program {
         font-weight: bold;
         text-align: right;
         margin-right: 0.3rem;
         flex-grow: 2;
-      }
-      .caret {
-        align-self: start;
-        margin-top: 6px;
       }
     }
   }

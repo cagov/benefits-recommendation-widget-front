@@ -40,6 +40,7 @@ ul.benefits li a:hover {
 ul.benefits li .details {
   display: flex;
   min-width: 69%;
+  align-items: center;
 }
 ul.benefits li .details .svg {
   margin-top: 0.3rem;
@@ -54,16 +55,13 @@ ul.benefits li .details .linktext {
 }
 ul.benefits li .program-caret {
   display: flex;
+  align-items: center;
 }
 ul.benefits li .program-caret .program {
   font-weight: bold;
   text-align: right;
   margin-right: 0.3rem;
   flex-grow: 2;
-}
-ul.benefits li .program-caret .caret {
-  align-self: start;
-  margin-top: 6px;
 }
 
 @media (max-width: 500px) {
