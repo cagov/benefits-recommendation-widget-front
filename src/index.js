@@ -30,6 +30,9 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     if(this.hasAttribute('language')) {
       this.language = this.getAttribute('language');
     }
+    if(this.hasAttribute('endpoint')) {
+      this.benefitsAPI = this.getAttribute('endpoint');
+    }
     if(this.hasAttribute('income')) {
       this.income = this.getAttribute('income');
     }
@@ -41,6 +44,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     this.widgetEnvData.userAgent = navigator.userAgent;
     this.widgetEnvData.language = this.language;
     this.widgetEnvData.income = this.income;
+    // experiment name and variation are defined after json is received
 
     // retrieve set of benefits links from API
     fetch(`${this.benefitsAPI}benefits`, {
@@ -97,29 +101,25 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
           `;
         })
 
+        this.widgetEnvData.experimentName = json.experimentName;
+        this.widgetEnvData.experimentVariation = json.experimentVariation;
+
         // post event render
         this.recordEvent('render');
         // apply other listeners
         this.applyListeners();
       } else {
-        // no links received from api, print comment on frontend
-
-        // create template from imported html
-        let template = document.createElement('template');
-        template.innerHTML = '<!-- benefits widget: no links to display received, probably intentionally throttling traffic -->';
-        // create shadow root
-        this.attachShadow({mode: "open"});
-        this.shadowRoot.append(template.content.cloneNode(true));
-        
+        // no links received from api, do not render anything inside custom element, it will stay hidden and take up no space        
       }
     })
     .catch((error) => {
-      console.error('Error:', error);
+      // console.log('Error:', error);
     });
   }
 
   recordEvent(event, linkClicked, linkClickedText) {
     this.widgetEnvData.event = event;
+    // console.log(this.widgetEnvData)
 
     if(event === 'click') {
       this.widgetEnvData.link = linkClicked;

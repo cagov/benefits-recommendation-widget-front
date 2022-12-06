@@ -20,7 +20,7 @@ Place the following HTML code consisting of a custom element and script tag wher
 
 ```
 <cagov-benefits-recs></cagov-benefits-recs>
-<script type="module" src="https://d1c0zaf5iw40ns.cloudfront.net/index.js"></script>
+<script type="module" async defer src="https://benefits-recommendation.innovation.ca.gov/index.js"></script>
 ```
 
 This component uses a responsive layout so will shrink to available space, inherit font choices of parent elements.
@@ -38,3 +38,16 @@ npm run local
 ```
 
 Then view the <a href="http://127.0.0.1:8080/test/index.html">local test page url</a>
+
+The custom element can pass a parameter defining the endpoint. This is only for testing, the endpoint parameter defaults to production and the parameter should not be used at all in production deploys.
+
+The staging API is: https://7ksmy2xna5.execute-api.us-west-1.amazonaws.com/
+
+The production API is: https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/
+
+Define the API as localhost with the port your arc backend is running to test API updates
+
+```
+<cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
+<script type="module" src="../dist/index.js"></script>
+```
