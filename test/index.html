@@ -1,10 +1,18 @@
 <!doctype html>
-<html>
+<html lang="en-US">
+  <head>
+    <title>Widget test page</title>
+  </head>
   <body>
+    <main>
+    <h1>Benefits recommendation test page</h1>
     <ul>
       <li>this list is outside the web component so unaffected by styles inside the shadow root</li>
     </ul>
-    <cagov-benefits-recs language="en-US" income="3000"></cagov-benefits-recs>
+    <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
     <script type="module" src="../dist/index.js"></script>
+
+    <p>paragraph underneath the widget</p>
+    </main>
   </body>
 </html>

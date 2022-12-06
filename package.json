@@ -1,6 +1,6 @@
 {
   "name": "@cagov/ds-benefits-recommendations-display",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Retrieve and display list of recommended benefits available to Californians",
   "main": "dist/index.js",
   "scripts": {
