@@ -2,7 +2,7 @@ name: Deploy PROD abortion.ca.gov
 on:
   push:
     branches:
-      - v1
+      - main
 
 jobs:
   build_deploy:
