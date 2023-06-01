@@ -51,3 +51,7 @@ Define the API as localhost with the port your arc backend is running to test AP
 <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
 <script type="module" src="../dist/index.js"></script>
 ```
+
+### Deploying
+
+The benefits widget frontend code is deployed to the S3 bucket benefits-recommendation.innovation.ca.gov. There is a workflow in this repo that will write updates there. This widget is not published to npm or the design system as of 6/1/2023.
