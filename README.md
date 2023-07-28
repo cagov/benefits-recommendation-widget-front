@@ -33,6 +33,12 @@ Version 1 is not yet translated. Future versions will be translated and will pre
 
 Local development of frontend widget:
 
+After code changes rebuild with:
+```
+npm run build
+```
+
+Start local server with:
 ```
 npm run local
 ```

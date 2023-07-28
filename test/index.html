@@ -10,8 +10,20 @@
       <li>this list is outside the web component so unaffected by styles inside the shadow root</li>
     </ul>
     <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
-    <script type="module" src="../dist/index.js"></script>
+    <script type="module" src="../dist/v1.1.js"></script>
 
+<!--
+  Add an endpoint attribute to the custom element to test different API environments
+
+  dev:
+  endpoint="http://localhost:3333/"
+  staging:
+  endpoint="https://7ksmy2xna5.execute-api.us-west-1.amazonaws.com/"
+
+  Having no endpoint param will default to production which is
+  production:
+  endpoint="https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/"
+-->
     <p>paragraph underneath the widget</p>
     </main>
   </body>
