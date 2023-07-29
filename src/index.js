@@ -2,14 +2,17 @@ import html from './template.html';
 import css from './css/index.css';
 
 /**
- * Web component that retrieves and displays a list of benefits available to Californians that are recommended for the current visitor on the host site
+ * Web component that retrieves and displays a list of benefits available to Californians
+ * that are recommended for the current visitor on the host site
  *
  * @element cagov-benefits-recs
  *
  *
- * @fires click - Default events which may be listened to in order to discover most popular accordions
+ * @fires click - Default events which may be listened to
+ * in order to discover most popular accordions
  *
- * @attr {string} language - optional language preference using language code like 'en-US' browser will be queried for this preference if attribute is not present
+ * @attr {string} language - optional language preference using language code
+ * like 'en-US' browser will be queried for this preference if attribute is not present
  *
  * @cssprop --primary-700 - Default value of #165ac2, used for all colors of borders and fills
  *
@@ -25,15 +28,15 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
   connectedCallback() {
     this.language = navigator.language;
-    this.income = "";
+    this.income = '';
 
-    if(this.hasAttribute('language')) {
+    if (this.hasAttribute('language')) {
       this.language = this.getAttribute('language');
     }
-    if(this.hasAttribute('endpoint')) {
+    if (this.hasAttribute('endpoint')) {
       this.benefitsAPI = this.getAttribute('endpoint');
     }
-    if(this.hasAttribute('income')) {
+    if (this.hasAttribute('income')) {
       this.income = this.getAttribute('income');
     }
 
@@ -50,33 +53,34 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     fetch(`${this.benefitsAPI}benefits`, {
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
     })
-    .then((response) => response.json())
-    .then((data) => {
-      let json = JSON.parse(data);
-      
-      // if i receive no info from the api do nothing
-      if(json.links && json.links.length > 1) {
+      .then(response => response.json())
+      .then((data) => {
+        const json = JSON.parse(data);
 
-        // create template from imported html
-        let template = document.createElement('template');
-        template.innerHTML = this.html;
-        // with style tag
-        let style = document.createElement('style');
-        template.content.prepend(style);
-        // create shadow root
-        this.attachShadow({mode: "open"});
-        this.shadowRoot.append(template.content.cloneNode(true));
-        // insert css into style element in template in shadow root
-        this.shadowRoot.querySelector('style').append(this.css); 
+        // if i receive no info from the api do nothing
+        if (json.links && json.links.length > 1) {
+          // create template from imported html
+          const template = document.createElement('template');
+          template.innerHTML = this.html;
+          // with style tag
+          const style = document.createElement('style');
+          template.content.prepend(style);
+          // create shadow root
+          this.attachShadow({ mode: 'open' });
+          this.shadowRoot.append(template.content.cloneNode(true));
+          // insert css into style element in template in shadow root
+          this.shadowRoot.querySelector('style').append(this.css);
 
-        this.shadowRoot.querySelector('h2').innerHTML = json.header;
-        this.shadowRoot.querySelector('p.tagline').innerHTML = json.tagline;
-        let listContainer = this.shadowRoot.querySelector('ul.benefits');
-        json.links.forEach(link => {
-          // the classnames used here are inside a shadow root so can be generic as they won't inherit rules applied to the same name outside this component's shadow DOM
-          listContainer.innerHTML += `
+          this.shadowRoot.querySelector('h2').innerHTML = json.header;
+          this.shadowRoot.querySelector('p.tagline').innerHTML = json.tagline;
+          const listContainer = this.shadowRoot.querySelector('ul.benefits');
+          json.links.forEach((link) => {
+            // the classnames used here are inside a shadow root so can be generic
+            //  as they won't inherit rules applied to the same name outside this
+            // component's shadow DOM.
+            listContainer.innerHTML += `
             <li>
               <a href="${link.url}" target="_blank" rel="noopener noreferrer">
                 <span class="details">
@@ -99,54 +103,54 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
               </a>
             </li>
           `;
-        })
+          });
 
-        this.widgetEnvData.experimentName = json.experimentName;
-        this.widgetEnvData.experimentVariation = json.experimentVariation;
+          this.widgetEnvData.experimentName = json.experimentName;
+          this.widgetEnvData.experimentVariation = json.experimentVariation;
 
-        // post event render
-        this.recordEvent('render');
-        // apply other listeners
-        this.applyListeners();
-      } else {
-        // no links received from api, do not render anything inside custom element, it will stay hidden and take up no space        
-      }
-    })
-    .catch((error) => {
-      // console.log('Error:', error);
-    });
+          // post event render
+          this.recordEvent('render');
+          // apply other listeners
+          this.applyListeners();
+        } else {
+          // no links received from api, do not render anything inside custom element,
+          // it will stay hidden and take up no space
+        }
+      })
+      .catch((error) => {
+        // console.log('Error:', error);
+      });
   }
 
   recordEvent(event, linkClicked, linkClickedText) {
     this.widgetEnvData.event = event;
     // console.log(this.widgetEnvData)
 
-    if(event === 'click') {
+    if (event === 'click') {
       this.widgetEnvData.link = linkClicked;
       this.widgetEnvData.linkText = linkClickedText;
     } else {
       delete this.widgetEnvData.link;
       delete this.widgetEnvData.linktext;
     }
-    
+
     fetch(`${this.benefitsAPI}event`, {
       method: 'POST',
       mode: 'no-cors',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(this.widgetEnvData)
+      body: JSON.stringify(this.widgetEnvData),
     });
   }
 
   applyListeners() {
-    let benefitsLinks = this.shadowRoot.querySelectorAll('ul.benefits a');
+    const benefitsLinks = this.shadowRoot.querySelectorAll('ul.benefits a');
     benefitsLinks.forEach(link => {
       link.addEventListener('click', event => {
-        this.recordEvent('click', event.target.closest('a').href,  event.target.innerText.trim());
-      })
-    })
+        this.recordEvent('click', event.target.closest('a').href, event.target.innerText.trim());
+      });
+    });
   }
-
 }
 window.customElements.define('cagov-benefits-recs', CaGovBenefitsRecs);
