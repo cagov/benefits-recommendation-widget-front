@@ -3,13 +3,14 @@
   "version": "1.1.0",
   "description": "Retrieve and display list of recommended benefits available to Californians",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",
     "build": "sass src/css/index.scss src/css/index.css && npm run build:js",
     "cdn:publish": "node ../../docs/src/publish/cdn-deploy.js",
     "prepublishOnly": "npm run build && npm test && npm run cdn:publish",
-    "local":"http-server",
+    "local": "http-server",
     "test": "web-test-runner \"test/**/*.js\" --node-resolve"
   },
   "repository": {
@@ -20,15 +21,28 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@open-wc/eslint-config": "^12.0.0",
     "@open-wc/testing": "^3.0.1",
     "@web/test-runner-playwright": "^0.8.8",
     "esbuild": "^0.14.51",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "http-server": "^14.1.1",
     "lit": "^2.0.0-rc.2",
+    "prettier": "^2.8.8",
+    "prettier-eslint": "^15.0.1",
     "sass": "^1.54.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc/eslint-config"
+    ]
   },
   "directories": {
     "test": "test"
+  },
+  "volta": {
+    "node": "18.17.0"
   },
   "bugs": {
     "url": "https://github.com/cagov/benefits-recommendation-widget-front/issues"
