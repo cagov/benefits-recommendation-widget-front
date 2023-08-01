@@ -1,5 +1,5 @@
 import html from './template.html';
-import css from './css/index.css';
+import css from './index.css';
 
 /**
  * Web component that retrieves and displays a list of benefits available to Californians that are recommended for the current visitor on the host site
@@ -36,6 +36,9 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     if(this.hasAttribute('income')) {
       this.income = this.getAttribute('income');
     }
+    if(this.hasAttribute('partner')) {
+      this.partner = this.getAttribute('partner');
+    }
 
     // create widget environment data object to pass to API
     this.widgetEnvData = {};
@@ -47,7 +50,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     // experiment name and variation are defined after json is received
 
     // retrieve set of benefits links from API
-    fetch(`${this.benefitsAPI}benefits`, {
+    fetch(`${this.benefitsAPI}benefits?partner=${this.partner}`, {
       headers: {
         'Content-Type': 'application/json',
       }
