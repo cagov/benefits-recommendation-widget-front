@@ -1,0 +1,162 @@
+/* GOVOPS GLOBAL CUSTOM STYLES */
+.flex-grow-2 {
+ flex-grow: 2 !important;
+}
+
+.flex-1 {
+ flex: 1 !important;
+}
+
+.flex-2 {
+ flex: 2 !important;
+}
+
+.flex-3 {
+ flex: 3 !important;
+}
+
+.flex-4 {
+ flex: 4 !important;
+}
+
+@media (min-width: 768px) {
+cagov-site-navigation .expanded-menu {
+    padding-left: 1.5rem;
+}
+
+ .flex-md-grow-2 {
+  flex-grow: 2 !important;
+ }
+
+ .flex-md-1 {
+  flex: 1 !important;
+ }
+
+ .flex-md-2 {
+  flex: 2 !important;
+ }
+
+ .flex-md-3 {
+  flex: 3 !important;
+ }
+
+ .flex-md-4 {
+  flex: 4 !important;
+ }
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+ color: var(--primary-900);
+ padding-bottom: 0 !important;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+ color: var(--primary-700);
+}
+
+.white a,
+.white a:hover,
+.white a:focus {
+ color: #ffffff !important;
+}
+
+/* Columns global override */
+.wp-block-column:first-child {
+ margin-right: 0;
+}
+
+.bg-primary-200,
+.bg-primary-200-hover:hover,
+.bg-primary-200-hover:focus {
+ background-color: var(--primary-200) !important;
+}
+
+.no-underline a {
+ text-decoration: none !important;
+}
+
+/* Navigation arrow fix */
+cagov-site-navigation .expanded-menu-section-header-arrow-svg {
+ fill: var(--primary-700);
+}
+
+cagov-site-navigation .expanded-menu-section-header-link:hover .expanded-menu-section-header-arrow-svg,
+cagov-site-navigation .expanded-menu-section-header-link:focus .expanded-menu-section-header-arrow-svg {
+ fill: var(--primary-900);
+}
+
+/* Width classes for float */
+@media (min-width: 768px) {
+ .width-40 {
+  width: 40%;
+ }
+
+ .width-35 {
+  width: 35%;
+ }
+
+ .width-30 {
+  width: 30%;
+ }
+
+ .width-25 {
+  width: 25%;
+ }
+
+ .width-20 {
+  width: 20%;
+ }
+
+ .width-15 {
+  width: 15%;
+ }
+}
+
+figure.m-b-0 img {
+ margin-bottom: 0 !important;
+}
+
+/* Remove space from the bottom */
+.page-container {
+ padding-bottom: 0 !important;
+ margin-bottom: 0 !important;
+}
+
+.main-content {
+ margin-bottom: 0 !important;
+ padding-bottom: 0 !important;
+}
+
+.main-primary {
+ padding-bottom: 0 !important;
+ margin-bottom: 0 !important;
+}
+
+/* footer nav */
+.wp-block-navigation__container {
+ padding-left: 0 !important;
+ padding-bottom: 0 !important;
+ display: block;
+}
+.wp-block-navigation-link {
+ margin-left: 0;
+ font-size: 1rem;
+}
+.wp-block-navigation-item__content:hover,
+.wp-block-navigation-item__content:focus {
+ text-decoration: underline !important;
+}

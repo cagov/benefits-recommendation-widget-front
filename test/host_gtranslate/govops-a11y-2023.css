@@ -1,0 +1,9 @@
+.official-header .official-languages
+	{ font-size: 16px; }
+#mc_embed_signup .asterisk, .indicates-required .asterisk, .wpforms-required-label
+	{ color: var(--danger-700) !important }
+#post-43 .no-underline p a, #post-55294 .no-underline p a
+	{ background-color: var(--gray-100); }
+#post-43 .no-underline p a:hover, #post-43 .no-underline p a:focus,
+#post-55294 .no-underline p a:hover, #post-55294 .no-underline p a:focus
+	{ text-decoration: underline !important;  }

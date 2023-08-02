@@ -1,0 +1,36 @@
+/* Cagov color scheme root variables */
+:root {
+ /* Theme colors */
+ --primary-50: #f7fafc;
+ --primary-100: #e6eff5;
+ --primary-200: #c5dae8;
+ --primary-300: #9dc1d8;
+ --primary-400: #6fa4c6;
+ --primary-500: #3e85b3;
+ --primary-600: #0f68a0;
+ --primary-700: #005388;
+ --primary-800: #00436d;
+ --primary-900: #00375b;
+
+ --accent1-50: #fff9f4;
+ --accent1-100: #fdeada;
+ --accent1-200: #fbcfa8;
+ --accent1-300: #f9ae6d;
+ --accent1-400: #f79742;
+ --accent1-500: #dd7518;
+ --accent1-600: #ab5a13;
+ --accent1-700: #82450e;
+ --accent1-800: #63340b;
+ --accent1-900: #522b09;
+
+ --accent2-50: #fafafb;
+ --accent2-100: #ededf0;
+ --accent2-200: #d4d4db;
+ --accent2-300: #bbbbc6;
+ --accent2-400: #a3a3b2;
+ --accent2-500: #89899d;
+ --accent2-600: #707088;
+ --accent2-700: #5c5c77;
+ --accent2-800: #484866;
+ --accent2-900: #383859;
+}
