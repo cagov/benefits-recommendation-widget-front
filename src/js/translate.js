@@ -8,12 +8,13 @@ const translate = (link, langCode) => {
   if (jsonData[0][key] === undefined || jsonData[0][key][langCode] === undefined) {
     return link;
   }
+
+  // Loop through properties in strings.json and set them to translatedLink.
   const translatedLink = link;
-  // @todo Smart loop through properties instead.
-  translatedLink.description = jsonData[0][key][langCode].description;
-  translatedLink.linktext = jsonData[0][key][langCode].linktext;
-  translatedLink.program = jsonData[0][key][langCode].program;
-  translatedLink.url = jsonData[0][key][langCode].url;
+  const properties = Object.getOwnPropertyNames(jsonData[0][key][langCode]);
+  properties.forEach((property) => {
+    translatedLink[property] = jsonData[0][key][langCode][property];
+  });
 
   return translatedLink;
 };
