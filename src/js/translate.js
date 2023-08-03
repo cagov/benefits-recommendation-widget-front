@@ -4,7 +4,7 @@ import jsonData from './strings.json' assert { type: 'json' };
 const translate = (link, langCode) => {
   const { key } = link;
 
-  // @todo Detect Google Translate.
+  // If strings.json doesn't have a translation to match the lang attribute and target key.
   if (jsonData[0][key] === undefined || jsonData[0][key][langCode] === undefined) {
     return link;
   }
