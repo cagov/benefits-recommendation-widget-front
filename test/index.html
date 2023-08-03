@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="en-US">
+
+<!-- @todo Make lang env based. -->
+<html lang="en">
+
   <head>
     <title>Widget test page</title>
   </head>
@@ -9,8 +12,15 @@
     <ul>
       <li>this list is outside the web component so unaffected by styles inside the shadow root</li>
     </ul>
-    <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
-    <script type="module" src="../dist/index.js"></script>
+      <!-- @todo Make configuration env based. -->
+      <!-- Use this for testing Local API + JS Source File (src/index.js) -->
+      <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
+      <script type="module" src="../src/index.js"></script>
+
+      <!-- Use this for testing Local API + JS Compiled (dist/index.js) File.
+      <cagov-benefits-recs endpoint="http://localhost:3333/"></cagov-benefits-recs>
+      <script type="module" src="../dist/index.js"></script>
+      -->
 
 <!--
   Add an endpoint attribute to the custom element to test different API environments
