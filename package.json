@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "description": "Retrieve and display list of recommended benefits available to Californians",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",

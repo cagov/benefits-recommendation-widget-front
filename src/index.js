@@ -1,5 +1,6 @@
-import html from './template.html';
-import css from './css/index.css';
+import html from './js/template.js';
+import css from './css/index.css' assert { type: 'css' };
+import { translate } from './js/translate.js';
 
 /**
  * Web component that retrieves and displays a list of benefits available to Californians
@@ -23,11 +24,17 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
     this.html = html;
     this.css = css;
-    this.benefitsAPI = 'https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/';
+
+    // @todo Use environment variables instead of comments to switch backends.
+    // Production url for backend API.
+    // this.benefitsAPI = 'https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/';
+
+    // Local url for backend API. Must be running for widget to work
+    this.benefitsAPI = 'http://localhost:3333';
   }
 
   connectedCallback() {
-    this.language = navigator.language;
+    this.language = document.querySelector('html').getAttribute('lang');
     this.income = '';
 
     if (this.hasAttribute('language')) {
@@ -71,12 +78,16 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
           this.attachShadow({ mode: 'open' });
           this.shadowRoot.append(template.content.cloneNode(true));
           // insert css into style element in template in shadow root
-          this.shadowRoot.querySelector('style').append(this.css);
+          this.shadowRoot.adoptedStyleSheets = [this.css];
 
           this.shadowRoot.querySelector('h2').innerHTML = json.header;
           this.shadowRoot.querySelector('p.tagline').innerHTML = json.tagline;
           const listContainer = this.shadowRoot.querySelector('ul.benefits');
+
           json.links.forEach((link) => {
+            // Translate strings into host's language.
+            translate(link, this.language);
+
             // the classnames used here are inside a shadow root so can be generic
             //  as they won't inherit rules applied to the same name outside this
             // component's shadow DOM.
@@ -146,8 +157,8 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
   applyListeners() {
     const benefitsLinks = this.shadowRoot.querySelectorAll('ul.benefits a');
-    benefitsLinks.forEach(link => {
-      link.addEventListener('click', event => {
+    benefitsLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
         this.recordEvent('click', event.target.closest('a').href, event.target.innerText.trim());
       });
     });
