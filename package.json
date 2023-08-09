@@ -8,8 +8,7 @@
     "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",
     "build": "npm run build:js",
-    "cdn:publish": "node ../../docs/src/publish/cdn-deploy.js",
-    "prepublishOnly": "npm run build && npm test && npm run cdn:publish",
+    "prepublishOnly": "npm run build && npm test",
     "local": "http-server",
     "test": "web-test-runner \"test/**/*.js\" --node-resolve"
   },

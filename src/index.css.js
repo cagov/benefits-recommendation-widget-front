@@ -1,3 +1,4 @@
+export default /* css */ `
 /* these style rules are used inside the component shadow root so can reference generic elements without influencing the containing page */
 section {
   background: #e1f1ee;
@@ -78,3 +79,4 @@ ul.benefits li .program-caret .program {
     flex-flow: column;
   }
 }
+`;
