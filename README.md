@@ -19,7 +19,7 @@ This widget will retrieve the following data points about its current placement 
 Place the following HTML code consisting of a custom element and script tag wherever you want the widget to appear on your page:
 
 ```
-<cagov-benefits-recs></cagov-benefits-recs>
+<cagov-benefits-recs host="YOUR-HOST-CODE-HERE"></cagov-benefits-recs>
 <script type="module" async defer src="https://benefits-recommendation.innovation.ca.gov/index.js"></script>
 ```
 
