@@ -3,13 +3,13 @@
   "version": "1.1.0",
   "description": "Retrieve and display list of recommended benefits available to Californians",
   "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",
-    "build": "sass src/css/index.scss src/css/index.css && npm run build:js",
-    "cdn:publish": "node ../../docs/src/publish/cdn-deploy.js",
-    "prepublishOnly": "npm run build && npm test && npm run cdn:publish",
-    "local":"http-server",
+    "build": "npm run build:js",
+    "prepublishOnly": "npm run build && npm test",
+    "local": "http-server",
     "test": "web-test-runner \"test/**/*.js\" --node-resolve"
   },
   "repository": {
@@ -24,8 +24,7 @@
     "@web/test-runner-playwright": "^0.8.8",
     "esbuild": "^0.14.51",
     "http-server": "^14.1.1",
-    "lit": "^2.0.0-rc.2",
-    "sass": "^1.54.0"
+    "lit": "^2.0.0-rc.2"
   },
   "directories": {
     "test": "test"

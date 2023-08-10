@@ -3,7 +3,7 @@
 This is the frontend of a benefits recommender. It takes up a small amount of screen space to display a few links to State of California public 
 
 Here is an early design mockup of the widget appearing on the final page of the getCalFresh application process: 
-<img src="./src/img/GetCalFresh-Completion-3Links.png" />
+<img src="./docs/img/GetCalFresh-Completion-3Links.png" />
 
 
 This is a web component designed to be used on many sites. It can accept information about the current visitor in order to make more informed decisions about which benefit application links to display.
@@ -19,7 +19,7 @@ This widget will retrieve the following data points about its current placement 
 Place the following HTML code consisting of a custom element and script tag wherever you want the widget to appear on your page:
 
 ```
-<cagov-benefits-recs></cagov-benefits-recs>
+<cagov-benefits-recs host="YOUR-HOST-CODE-HERE"></cagov-benefits-recs>
 <script type="module" async defer src="https://benefits-recommendation.innovation.ca.gov/index.js"></script>
 ```
 
