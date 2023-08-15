@@ -5,14 +5,21 @@
   </head>
   <body>
     <main>
-    <h1>Benefits recommendation test page</h1>
-    <ul>
-      <li>this list is outside the web component so unaffected by styles inside the shadow root</li>
-    </ul>
-    <cagov-benefits-recs host="test" endpoint="http://localhost:3333/"></cagov-benefits-recs>
-    <script type="module" src="../src/index.js"></script>
+      <h1>Benefits recommendation test page</h1>
+      <ul>
+        <li>
+          this list is outside the web component so unaffected by styles inside
+          the shadow root
+        </li>
+      </ul>
+      <cagov-benefits-recs
+        host="test"
+        endpoint="http://localhost:3333/"
+      ></cagov-benefits-recs>
 
-<!--
+      <script type="module" src="../src/index.js"></script>
+
+      <!--
   Add an endpoint attribute to the custom element to test different API environments
 
   dev:
@@ -24,7 +31,7 @@
   production:
   endpoint="https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/"
 -->
-    <p>paragraph underneath the widget</p>
+      <p>paragraph underneath the widget</p>
     </main>
   </body>
 </html>

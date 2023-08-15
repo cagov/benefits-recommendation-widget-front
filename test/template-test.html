@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <title>Widget test page</title>
+  </head>
+  <body>
+    <main>
+      <h1>Benefits recommendation test page</h1>
+      <ul>
+        <li>
+          this list is outside the web component so unaffected by styles inside
+          the shadow root
+        </li>
+      </ul>
+      <cagov-benefits-recs
+        endpoint="http://localhost:3333/"
+      ></cagov-benefits-recs>
+
+      <template id="cagov-benefits-recs-template">
+        <style>
+          .graphic svg {
+            max-height: 1rem;
+          }
+        </style>
+        <section aria-label="benefits recommendations">
+          <h2 part="header2"></h2>
+          <p class="tagline"></p>
+          <ul class="benefits link-list">
+            <li class="link-item">
+              <a class="anchor" href="">
+                <span class="linktext"></span>
+                <span class="description"></span>
+                <span class="program"></span>
+                <span class="graphic"></span>
+              </a>
+            </li>
+          </ul>
+        </section>
+      </template>
+
+      <script type="module" src="../src/index.js"></script>
+
+      <p>paragraph underneath the widget</p>
+    </main>
+  </body>
+</html>
