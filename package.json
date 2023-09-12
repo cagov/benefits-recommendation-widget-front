@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build:js": "esbuild src/index.js --bundle --outfile=dist/index.js --loader:.html=text --loader:.css=text --format=esm",
+    "build:js": "esbuild src/index.js --bundle --outfile=dist/cagov-benefits-recs.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",
     "build": "npm run build:js",
     "prepublishOnly": "npm run build && npm test",
