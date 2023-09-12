@@ -21,26 +21,26 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
     this.html = html;
     this.css = css;
-    this.benefitsAPI =
-      "https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/";
   }
 
   connectedCallback() {
-    this.language = document.querySelector("html").getAttribute("lang");
-    this.income = "";
+    this.benefitsAPI = this.hasAttribute("endpoint")
+      ? this.getAttribute("endpoint")
+      : "https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/";
 
-    if (this.hasAttribute("language")) {
-      this.language = this.getAttribute("language");
-    }
-    if (this.hasAttribute("endpoint")) {
-      this.benefitsAPI = this.getAttribute("endpoint");
-    }
-    if (this.hasAttribute("income")) {
-      this.income = this.getAttribute("income");
-    }
-    if (this.hasAttribute("host")) {
-      this.host = this.getAttribute("host");
-    }
+    const lang = document.querySelector("html").getAttribute("lang");
+
+    this.language = this.hasAttribute("language")
+      ? this.getAttribute("language")
+      : lang;
+
+    this.income = this.hasAttribute("income")
+      ? this.getAttribute("income")
+      : "";
+
+    this.host = this.hasAttribute("host")
+      ? this.getAttribute("host")
+      : window.location.href;
 
     // create widget environment data object to pass to API
     this.widgetEnvData = {};
@@ -55,13 +55,15 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
     const queryKeys = ["host", "language"];
     const queryString = queryKeys
       .reduce((bucket, key) => {
-        if (this[key]) bucket.push(`${key}=${this[key]}`);
+        if (this[key]) bucket.push(`${key}=${encodeURIComponent(this[key])}`);
         return bucket;
       }, [])
       .join("&");
 
+    const benefitsURL = `${this.benefitsAPI}benefits?${queryString}`;
+
     // retrieve set of benefits links from API
-    fetch(`${this.benefitsAPI}benefits?${queryString}`, {
+    fetch(benefitsURL, {
       headers: {
         "Content-Type": "application/json",
       },
