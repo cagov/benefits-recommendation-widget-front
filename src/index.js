@@ -24,9 +24,13 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
   }
 
   connectedCallback() {
-    this.benefitsAPI = this.hasAttribute("endpoint")
-      ? this.getAttribute("endpoint")
-      : "https://k61aw4mwkc.execute-api.us-west-1.amazonaws.com/";
+    this.benefitsAPI = (
+      this.hasAttribute("endpoint")
+        ? this.getAttribute("endpoint")
+        : "https://br.api.innovation.ca.gov/"
+    ).replace(/\/$/, "");
+
+    console.log(this.benefitsAPI);
 
     const lang = document.querySelector("html").getAttribute("lang");
 
@@ -60,7 +64,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       }, [])
       .join("&");
 
-    const benefitsURL = `${this.benefitsAPI}benefits?${queryString}`;
+    const benefitsURL = `${this.benefitsAPI}/benefits?${queryString}`;
 
     // retrieve set of benefits links from API
     fetch(benefitsURL, {
@@ -121,7 +125,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       delete this.widgetEnvData.linktext;
     }
 
-    fetch(`${this.benefitsAPI}event`, {
+    fetch(`${this.benefitsAPI}/event`, {
       method: "POST",
       mode: "no-cors",
       headers: {
