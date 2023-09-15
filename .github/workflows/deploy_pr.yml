@@ -67,5 +67,5 @@ jobs:
         with:
           message: |
             Previews available.
-            [Preview connected to staging API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/staging.html)
-            [Preview connected to production API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/prod.html)
+            [Preview connected to staging API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/preview/staging.html)
+            [Preview connected to production API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/preview/prod.html)
