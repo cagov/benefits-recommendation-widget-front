@@ -10,6 +10,8 @@ Participating California State government departments can embed the benefits rec
 
 The widget accepts information about the current visitor to make more informed decisions about which benefit application links to display. Then the widget communicates with our back-end server to determine the best links to display.
 
+The back-end server's code is hosted in another repository, [@cagov/benefits-recommendation-widget-back](https://github.com/cagov/benefits-recommendation-widget-back).
+
 ## How to use
 
 Place the following HTML snippet wherever you want the widget to appear on your page.
