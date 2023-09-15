@@ -45,7 +45,7 @@ Start local server with:
 npm run local
 ```
 
-Then view the <a href="http://127.0.0.1:8080/test/index.html">local test page url</a>
+Then view the <a href="http://127.0.0.1:8080/preview/local.html">local test page url</a>
 
 The custom element can pass a parameter defining the endpoint. This is only for testing, the endpoint parameter defaults to production and the parameter should not be used at all in production deploys.
 
