@@ -15,13 +15,13 @@ const generate = (props) => {
         <main>
           <hgroup>
             <h1>Benefits Recommender Preview</h1>
-            <p>Widget: ${props.widgetEnv} ${pr}</p>
-            <p>API: ${props.apiEnv}</p>
+            <p>Widget branch: ${props.widgetEnv} ${pr}</p>
+            <p>API environment: ${props.apiEnv}</p>
           </hgroup>
 
-          <cagov-benefits-recs endpoint="../cagov-benefits-recs.js"></cagov-benefits-recs>
+          <cagov-benefits-recs endpoint="${props.apiEndpoint}"></cagov-benefits-recs>
 
-          <script type="module" async defer src="${props.scriptSrc}"></script>
+          <script type="module" async defer src="../cagov-benefits-recs.js"></script>
         </main>
       </body>
     </html>
