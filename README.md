@@ -2,15 +2,15 @@
 
 The benefits recommender is a small, embeddable HTML widget. It helps constituents find and apply for California State benefits.
 
-This repository holds the front-end code.
+This repository holds the front-end code. The back-end code is hosted in another repository, [cagov/benefits-recommendation-widget-back](https://github.com/cagov/benefits-recommendation-widget-back).
 
 ## How it works
 
-Participating California State government departments can embed the benefits recommender widget on their web pages. The widget then displays links to apply for benefits across the state.
+Participating California State government departments can embed the benefits recommender widget on their web pages. On each visit, the widget performs the following actions.
 
-The widget accepts information about the current visitor to make more informed decisions about which benefit application links to display. Then the widget communicates with our back-end server to determine the best links to display.
-
-The back-end server's code is hosted in another repository, [@cagov/benefits-recommendation-widget-back](https://github.com/cagov/benefits-recommendation-widget-back).
+1. First, the widget accepts information about the current visitor, such as preferred language.
+2. Next, the widget communicates with our back-end server to determine the most relevant benefit application links to show to the visitor.
+3. The widget then displays those benefit application links to the visitor.
 
 ## How to use
 
