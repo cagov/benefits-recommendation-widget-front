@@ -25,16 +25,6 @@ That's it!
 
 While the above snippet will work alone, we strongly recommend talking to us before use. We can tune our servers to ensure visitors to your site receive the most relevant benefit application links.
 
-## Development
-
-To start a local development server from this repo, run the following command. (NodeJS is required.)
-
-```
-npm run local
-```
-
-Then view the <a href="http://127.0.0.1:8080/preview/local.html">local test page URL</a>.
-
 The widget accepts a few parameters for development purposes.
 
 ### Host
@@ -96,3 +86,13 @@ Here are the API endpoints for each environment.
 | Local API                | http://localhost:3333                    |
 | Staging API              | https://staging.br.api.innovation.ca.gov |
 | Production API (default) | https://br.api.innovation.ca.gov         |
+
+### Development
+
+To make changes here, to the widget itself, run the following command to start a local development server from this repo. (NodeJS is required.)
+
+```
+npm run local
+```
+
+Then view the <a href="http://127.0.0.1:8080/preview/local.html">local test page URL</a>.
