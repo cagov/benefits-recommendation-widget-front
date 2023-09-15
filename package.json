@@ -8,6 +8,7 @@
     "build:js": "esbuild src/index.js --bundle --outfile=dist/cagov-benefits-recs.js --loader:.html=text --loader:.css=text --format=esm",
     "build:more-args": " --minify ",
     "build": "npm run build:js",
+    "build:preview": "node preview/generate.js",
     "prepublishOnly": "npm run build && npm test",
     "local": "http-server",
     "test": "web-test-runner \"test/**/*.js\" --node-resolve"

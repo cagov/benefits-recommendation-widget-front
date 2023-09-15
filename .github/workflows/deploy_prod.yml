@@ -1,4 +1,4 @@
-name: Deploy PROD abortion.ca.gov
+name: Production deployment
 on:
   push:
     branches:

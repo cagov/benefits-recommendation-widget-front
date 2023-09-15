@@ -30,8 +30,6 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
         : "https://br.api.innovation.ca.gov/"
     ).replace(/\/$/, "");
 
-    console.log(this.benefitsAPI);
-
     const lang = document.querySelector("html").getAttribute("lang");
 
     this.language = this.hasAttribute("language")
@@ -72,6 +70,12 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
         "Content-Type": "application/json",
       },
     })
+      .catch((error) => {
+        throw new BenefitsRecsAPIError(
+          `Benefits Recommendation API unavailable. Hiding widget.`,
+          { cause: error }
+        );
+      })
       .then((response) => response.json())
       .then((json) => {
         let data = JSON.parse(json);
@@ -109,7 +113,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
         }
       })
       .catch((error) => {
-        // console.log('Error:', error);
+        console.log(error);
       });
   }
 

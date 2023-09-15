@@ -1,0 +1,71 @@
+name: PR preview deployment
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - ready_for_review
+      - reopened
+
+jobs:
+  build_deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})" >> $GITHUB_ENV
+
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF})" >> $GITHUB_ENV
+
+      - name: Escape branch name for URL
+        shell: bash
+        run: echo "URLSAFE_BRANCH_NAME=$(echo ${BRANCH_NAME} | sed 's|[^A-Za-z0-9-]|-|g' | sed -E 's|-*([A-Za-z0-9]*.*[A-Za-z0-9]+)-*|\1|')" >> $GITHUB_ENV
+
+      - name: Report escaped branch name
+        shell: bash
+        run: echo ${URLSAFE_BRANCH_NAME}
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+          npm run build:preview -- ${URLSAFE_BRANCH_NAME} ${PRNum}
+        env:
+          PRNum: ${{ github.event.number }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+
+      - name: Deploy to S3
+        run: aws s3 sync ./dist s3://staging.cdn.innovation.ca.gov/br/pr/${URLSAFE_BRANCH_NAME} --follow-symlinks
+
+      - name: Invalidate Cloudfront
+        env:
+          AWS_RETRY_MODE: standard
+          AWS_MAX_ATTEMPTS: 6
+        run: aws cloudfront create-invalidation --distribution-id EPGKQG9OR4C9S --paths "/br/*"
+
+      - name: Post URL to PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            Previews available.
+            [Preview connected to staging API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/staging.html)
+            [Preview connected to production API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/prod.html)
