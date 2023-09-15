@@ -1,65 +1,96 @@
 # Benefits recommendation widget
 
-This is the frontend of a benefits recommender. It takes up a small amount of screen space to display a few links to State of California public
+The benefits recommender is a small, embeddable HTML widget. It helps constituents find and apply for California State benefits.
 
-Here is an early design mockup of the widget appearing on the final page of the getCalFresh application process:
-<img src="./docs/img/GetCalFresh-Completion-3Links.png" />
+This repository holds the front-end code.
 
-This is a web component designed to be used on many sites. It can accept information about the current visitor in order to make more informed decisions about which benefit application links to display.
+## How it works
 
-It calls a backend API when it loads to retrieve the set of benefits links and language for its current placement
+Participating California State government departments can embed the benefits recommender widget on their web pages. The widget then displays links to apply for benefits across the state.
 
-This widget will retrieve the following data points about its current placement and pass these to the API to retrieve the set of benefits links:
+The widget accepts information about the current visitor to make more informed decisions about which benefit application links to display. Then the widget communicates with our back-end server to determine the best links to display.
 
-- full page url
-- language preference set in the visitor's browser
+## How to use
 
-## How to embed in your page
-
-Place the following HTML code consisting of a custom element and script tag wherever you want the widget to appear on your page:
+Place the following HTML snippet wherever you want the widget to appear on your page.
 
 ```
 <cagov-benefits-recs></cagov-benefits-recs>
 <script type="module" async defer src="https://cdn.innovation.ca.gov/br/cagov-benefits-recs.js"></script>
 ```
 
-This component uses a responsive layout so will shrink to available space, inherit font choices of parent elements.
+That's it!
 
-The script example here contains code that delays its execution until after the onload event so that the retrieval or execution of the small amount of javascript in this component will not delay the initial render of the parent page.
-
-Version 1 is not yet translated. Future versions will be translated and will present themselves in the same language as the containing page.
+While the above snippet will work alone, we strongly recommend talking to us before use. We can tune our servers to ensure visitors to your site receive the most relevant benefit application links.
 
 ## Development
 
-Local development of frontend widget:
-
-After code changes rebuild with:
-
-```
-npm run build
-```
-
-Start local server with:
+To start a local development server from this repo, run the following command. (NodeJS is required.)
 
 ```
 npm run local
 ```
 
-Then view the <a href="http://127.0.0.1:8080/preview/local.html">local test page url</a>
+Then view the <a href="http://127.0.0.1:8080/preview/local.html">local test page URL</a>.
 
-The custom element can pass a parameter defining the endpoint. This is only for testing, the endpoint parameter defaults to production and the parameter should not be used at all in production deploys.
+The widget accepts a few parameters for development purposes.
 
-The staging API is: https://staging.br.api.innovation.ca.gov
+### Host
 
-The production API is: https://br.api.innovation.ca.gov
+The optional `host` parameter tells the widget to pretend it's hosted on another page.
 
-Define the API as localhost with the port your arc backend is running to test API updates
+`host` should be supplied as a full URL.
+
+When omitted, `host` will default to the current page.
+
+But why would you want to use this? From our back-end API, we serve different links to the widget based upon where it's hosted. In development/staging environments, your page URLs may differ from the production URLs our back-end API expects. Therefore, the `host` parameter lets you "spoof" the widget's parent page. In non-production contexts, this can be helpful to correctly preview which links will be displayed by the widget.
 
 ```
-<cagov-benefits-recs endpoint="http://localhost:3333"></cagov-benefits-recs>
-<script type="module" src="../dist/index.js"></script>
+<cagov-benefits-recs
+  host="https://my-site.ca.gov/my-other-page-in-production.html"
+></cagov-benefits-recs>
+
+<script type="module" async defer src="https://cdn.innovation.ca.gov/br/cagov-benefits-recs.js"></script>
 ```
 
-### Deploying
+### Language
 
-The benefits widget frontend code is deployed to the S3 bucket cdn.innovation.ca.gov. There is a workflow in this repo that will write updates there. This widget is not published to npm or the design system as of 6/1/2023.
+The optional `language` parameter tells the widget which language is preferred.
+
+`language` should be submitted as an [ISO 639-1 code](https://www.w3schools.com/tags/ref_language_codes.asp).
+
+When omitted, `language` will default to the `lang` attribute of the `<html>` element. (For example, `<html lang="es">`.)
+
+```
+<cagov-benefits-recs
+  language="es"
+></cagov-benefits-recs>
+
+<script type="module" async defer src="https://cdn.innovation.ca.gov/br/cagov-benefits-recs.js"></script>
+```
+
+> Note: the widget's content is not yet translated to other languages. Until then, this parameter will have no effect. Stay tuned! Translations are coming soon.
+
+### Endpoint
+
+The optional `endpoint` parameter tells the widget which API to contact for links.
+
+When omitted, `endpoint` will default to the production API.
+
+This is probably only useful for the widget developers.
+
+```
+<cagov-benefits-recs
+  endpoint="http://localhost:3333"
+></cagov-benefits-recs>
+
+<script type="module" async defer src="https://cdn.innovation.ca.gov/br/cagov-benefits-recs.js"></script>
+```
+
+Here are the API endpoints for each environment.
+
+| Environment              | Endpoint URL                             |
+| ------------------------ | ---------------------------------------- |
+| Local API                | http://localhost:3333                    |
+| Staging API              | https://staging.br.api.innovation.ca.gov |
+| Production API (default) | https://br.api.innovation.ca.gov         |
