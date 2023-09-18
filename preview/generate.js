@@ -19,7 +19,12 @@ const generate = (props) => {
             <p>API environment: ${props.apiEnv}</p>
           </hgroup>
 
+          <p>Here's some test content.</p>
+          <p>The widget follows.</p>
+
           <cagov-benefits-recs endpoint="${props.apiEndpoint}"></cagov-benefits-recs>
+
+          <p>Site content runs below the widget too.</p>
 
           <script type="module" async defer src="../cagov-benefits-recs.js"></script>
         </main>

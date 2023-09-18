@@ -1,24 +1,30 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <title>Widget test page</title>
+    <title>Benefits Recommender Preview</title>
+    <link rel="stylesheet" href="preview.css" />
   </head>
   <body>
     <main>
-      <h1>Benefits recommendation test page</h1>
-      <ul>
-        <li>
-          this list is outside the web component so unaffected by styles inside
-          the shadow root
-        </li>
-      </ul>
+      <hgroup>
+        <h1>Benefits Recommender Preview</h1>
+        <p>Widget: local</p>
+        <p>API: local</p>
+      </hgroup>
 
-      <cagov-benefits-recs
-        host="https://sdio.edd.ca.gov/DIAE/Pages/ExternalUser/InitialClaim/Confirmation.aspx"
-        endpoint="http://localhost:3333/"
-      ></cagov-benefits-recs>
+      <p>Here's some test content.</p>
+      <p>The widget follows.</p>
 
-      <script type="module" src="../src/index.js"></script>
+      <div id="widget">
+        <cagov-benefits-recs
+          host="https://sdio.edd.ca.gov/DIAE/Pages/ExternalUser/InitialClaim/Confirmation.aspx"
+          endpoint="http://localhost:3333/"
+        ></cagov-benefits-recs>
+      </div>
+
+      <script type="module" async defer src="../src/index.js"></script>
+
+      <p>Site content runs below the widget too.</p>
 
       <!--
         ** Endpoint **
@@ -41,8 +47,6 @@
 
         host="https://sdio.edd.ca.gov/DIAE/Pages/ExternalUser/InitialClaim/Confirmation.aspx"
       -->
-
-      <p>paragraph underneath the widget</p>
     </main>
   </body>
 </html>
