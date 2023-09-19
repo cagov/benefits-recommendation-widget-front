@@ -66,7 +66,4 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           message: |
-            Previews available. (Note that production API data may still be turned off.)
-
-            [Preview widget with data from staging API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/preview/staging.html)
-            [Preview widget with data from production API](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/preview/prod.html)
+            [Widget preview available](https://staging.cdn.innovation.ca.gov/br/pr/${{ env.URLSAFE_BRANCH_NAME }}/preview/index.html).

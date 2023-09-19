@@ -10,19 +10,25 @@ const generate = (props) => {
     <html lang="en-US">
       <head>
         <title>Benefits Recommender Preview</title>
+        <script type="module" src="env-picker.js"></script>
+        <link rel="stylesheet" href="preview.css" />
       </head>
       <body>
         <main>
           <hgroup>
             <h1>Benefits Recommender Preview</h1>
             <p>Widget branch: ${props.widgetEnv} ${pr}</p>
-            <p>API environment: ${props.apiEnv}</p>
+            <env-picker></env-picker>
           </hgroup>
 
           <p>Here's some test content.</p>
           <p>The widget follows.</p>
 
-          <cagov-benefits-recs endpoint="${props.apiEndpoint}"></cagov-benefits-recs>
+          <div id="widget-box">
+            <cagov-benefits-recs
+              endpoint="https://staging.br.api.innovation.ca.gov">
+            </cagov-benefits-recs>
+          </div>
 
           <p>Site content runs below the widget too.</p>
 
@@ -42,21 +48,16 @@ const generate = (props) => {
   const widgetEnv = args[2] || "main";
   const prNumber = args[3] || undefined;
 
-  const prodHtml = generate({
-    apiEnv: "production",
-    apiEndpoint: "https://br.api.innovation.ca.gov",
-    widgetEnv,
-    prNumber,
-  });
-
-  const stagingHtml = generate({
-    apiEnv: "staging",
-    apiEndpoint: "https://staging.br.api.innovation.ca.gov",
+  const html = generate({
     widgetEnv,
     prNumber,
   });
 
   await fs.mkdir("dist/preview", { recursive: true });
-  await fs.writeFile("dist/preview/prod.html", prodHtml);
-  await fs.writeFile("dist/preview/staging.html", stagingHtml);
+
+  await Promise.all([
+    fs.writeFile("dist/preview/index.html", html),
+    fs.copyFile("preview/env-picker.js", "dist/preview/env-picker.js"),
+    fs.copyFile("preview/preview.css", "dist/preview/preview.css"),
+  ]);
 })().catch((error) => console.log(error));
