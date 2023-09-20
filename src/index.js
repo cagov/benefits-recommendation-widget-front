@@ -71,7 +71,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       },
     })
       .catch((error) => {
-        throw new BenefitsRecsAPIError(
+        throw new Error(
           `Benefits Recommendation API unavailable. Hiding widget.`,
           { cause: error }
         );

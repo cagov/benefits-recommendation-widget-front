@@ -1,0 +1,11 @@
+hgroup {
+  border-left: dimgray solid 3px;
+  padding: 1rem 2rem;
+  background: repeating-linear-gradient(
+    135deg,
+    whitesmoke,
+    whitesmoke 3rem,
+    white 3rem,
+    white 6rem
+  );
+}
