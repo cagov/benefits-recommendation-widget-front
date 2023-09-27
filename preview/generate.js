@@ -10,6 +10,7 @@ const generate = (props) => {
     <html lang="en-US">
       <head>
         <title>Benefits Recommender Preview</title>
+        <link rel="icon" href="data:;base64,iVBORw0KGgo=">
         <script type="module" src="env-picker.js"></script>
         <link rel="stylesheet" href="preview.css" />
       </head>
