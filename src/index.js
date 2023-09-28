@@ -1,40 +1,20 @@
-import html from "./template.html.js";
-import css from "./index.css.js";
-import linkHtml from "./link.html.js";
+import { css, rootHtml, linkHtml } from "./templates.js";
 
-/**
- * Web component that retrieves and displays a list of benefits available to Californians that are recommended for the current visitor on the host site
- *
- * @element cagov-benefits-recs
- *
- *
- * @fires click - Default events which may be listened to in order to discover most popular accordions
- *
- * @attr {string} language - optional language preference using language code like 'en-US' browser will be queried for this preference if attribute is not present
- *
- * @cssprop --primary-700 - Default value of #165ac2, used for all colors of borders and fills
- *
- */
 export class CaGovBenefitsRecs extends window.HTMLElement {
   constructor() {
-    super(html, css);
-
-    this.html = html;
-    this.css = css;
+    super();
   }
 
   connectedCallback() {
-    this.benefitsAPI = (
+    this.endpoint = (
       this.hasAttribute("endpoint")
         ? this.getAttribute("endpoint")
-        : "https://br.api.innovation.ca.gov/"
+        : "https://br.api.innovation.ca.gov"
     ).replace(/\/$/, "");
-
-    const lang = document.querySelector("html").getAttribute("lang");
 
     this.language = this.hasAttribute("language")
       ? this.getAttribute("language")
-      : lang;
+      : document.querySelector("html").getAttribute("lang");
 
     this.income = this.hasAttribute("income")
       ? this.getAttribute("income")
@@ -44,28 +24,16 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       ? this.getAttribute("host")
       : window.location.href;
 
-    // create widget environment data object to pass to API
-    this.widgetEnvData = {};
-    this.widgetEnvData.event = "render";
-    this.widgetEnvData.displayURL = window.location.toString();
-    this.widgetEnvData.userAgent = navigator.userAgent;
-    this.widgetEnvData.language = this.language;
-    this.widgetEnvData.income = this.income;
-    // experiment name and variation are defined after json is received
+    const benefitsUrl = new URL(`${this.endpoint}/benefits`);
 
-    // We'll append the queryString to the URL of our API call.
+    // We'll append the query parameters to the URL of our API call.
     const queryKeys = ["host", "language"];
-    const queryString = queryKeys
-      .reduce((bucket, key) => {
-        if (this[key]) bucket.push(`${key}=${encodeURIComponent(this[key])}`);
-        return bucket;
-      }, [])
-      .join("&");
+    queryKeys.forEach((key) => {
+      if (this[key]) benefitsUrl.searchParams.append(key, this[key]);
+    });
 
-    const benefitsURL = `${this.benefitsAPI}/benefits?${queryString}`;
-
-    // retrieve set of benefits links from API
-    fetch(benefitsURL, {
+    // Retrieve set of benefits links from API.
+    fetch(benefitsUrl.href, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -77,22 +45,20 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
         );
       })
       .then((response) => response.json())
-      .then((json) => {
-        let data = JSON.parse(json);
-
-        // if i receive no info from the api do nothing
+      .then((json) => JSON.parse(json))
+      .then((data) => {
+        // Only render the widget if we actually get valid links.
         if (data.links && data.links.length > 1) {
-          // create template from imported html
-          let template = document.createElement("template");
-          template.innerHTML = this.html;
-          // with style tag
-          let style = document.createElement("style");
+          const template = document.createElement("template");
+          template.innerHTML = rootHtml;
+
+          const style = document.createElement("style");
+          style.textContent = css;
+
           template.content.prepend(style);
-          // create shadow root
+
           this.attachShadow({ mode: "open" });
           this.shadowRoot.append(template.content.cloneNode(true));
-          // insert css into style element in template in shadow root
-          this.shadowRoot.querySelector("style").append(this.css);
 
           this.shadowRoot.querySelector("h2").innerHTML = data.header;
           this.shadowRoot.querySelector("p.tagline").innerHTML = data.tagline;
@@ -101,15 +67,15 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
             listContainer.innerHTML += linkHtml(link);
           });
 
-          this.widgetEnvData.experimentName = data.experimentName;
-          this.widgetEnvData.experimentVariation = data.experimentVariation;
+          this.experimentName = data.experimentName;
+          this.experimentVariation = data.experimentVariation;
 
-          // post event render
           this.recordEvent("render");
-          // apply other listeners
           this.applyListeners();
         } else {
-          // no links received from api, do not render anything inside custom element, it will stay hidden and take up no space
+          console.log(
+            "No links received by Benefits Recommendation API. Hiding widget."
+          );
         }
       })
       .catch((error) => {
@@ -117,39 +83,32 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
       });
   }
 
-  recordEvent(event, linkClicked, linkClickedText) {
-    this.widgetEnvData.event = event;
-    // console.log(this.widgetEnvData)
+  recordEvent(event, details = {}) {
+    const defaults = {
+      displayURL: window.location.toString(),
+      userAgent: navigator.userAgent,
+      language: this.language,
+      income: this.income,
+      experimentName: this.experimentName,
+      experimentVariation: this.experimentVariation,
+    };
 
-    if (event === "click") {
-      this.widgetEnvData.link = linkClicked;
-      this.widgetEnvData.linkText = linkClickedText;
-    } else {
-      delete this.widgetEnvData.link;
-      delete this.widgetEnvData.linktext;
-    }
+    const data = Object.assign({ event }, defaults, details);
 
-    fetch(`${this.benefitsAPI}/event`, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.widgetEnvData),
-    });
+    navigator.sendBeacon(`${this.endpoint}/event`, JSON.stringify(data));
   }
 
   applyListeners() {
-    let benefitsLinks = this.shadowRoot.querySelectorAll("ul.benefits a");
+    const benefitsLinks = this.shadowRoot.querySelectorAll("ul.benefits a");
     benefitsLinks.forEach((link) => {
       link.addEventListener("click", (event) => {
-        this.recordEvent(
-          "click",
-          event.target.closest("a").href,
-          event.target.innerText.trim()
-        );
+        this.recordEvent("click", {
+          link: event.target.closest("a").href,
+          linkText: event.target.innerText.trim(),
+        });
       });
     });
   }
 }
+
 window.customElements.define("cagov-benefits-recs", CaGovBenefitsRecs);

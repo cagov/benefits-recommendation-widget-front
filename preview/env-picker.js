@@ -117,25 +117,24 @@ const shadowCss = /* css */ `
   }
 `;
 
-const getHostOptions = async (endpoint) => {
-  const hostsUrl = `${endpoint}/hosts`;
+const getHostOptions = async () => {
+  const url = "https://cdn.innovation.ca.gov/br/benefits-recs-defs.json";
 
-  return await fetch(hostsUrl, {
+  return await fetch(url, {
     headers: {
       "Content-Type": "application/json",
     },
   })
     .then((response) => response.json())
-    .then((json) => JSON.parse(json))
-    .then((hostDefs) =>
-      hostDefs.map((hostDef) => ({
+    .then((data) =>
+      data.hosts.map((hostDef) => ({
         id: hostDef.id,
         value: hostDef.urls[0],
         text: hostDef.id,
       }))
     )
     .catch(() => {
-      alert(`Endpoint unavailable: ${endpoint}`);
+      alert(`Definitions unavailable: ${url}`);
       return [];
     });
 };
@@ -144,11 +143,7 @@ const hydrateMenus = async () => {
   const menus = { ...defaultMenus };
   const widget = document.querySelector("cagov-benefits-recs");
 
-  const endpoint = widget.hasAttribute("endpoint")
-    ? widget.getAttribute("endpoint")
-    : "https://br.api.innovation.ca.gov";
-
-  const hosts = (await getHostOptions(endpoint)) || [];
+  const hosts = (await getHostOptions()) || [];
   menus.host.options = [...menus.host.options, ...hosts];
 
   Object.keys(menus).forEach((key) => {
@@ -186,10 +181,7 @@ class EnvPicker extends window.HTMLElement {
     template.content.prepend(style);
     this.shadowRoot.append(template.content.cloneNode(true));
 
-    this.applyEndpointListener();
-
-    const { endpoint, ...rest } = this.menus;
-    Object.keys(rest).forEach((key) => {
+    Object.keys(this.menus).forEach((key) => {
       this.applySelectListener(key);
     });
 
@@ -208,8 +200,6 @@ class EnvPicker extends window.HTMLElement {
 
     const newWidget = document.createElement("cagov-benefits-recs");
 
-    console.log(this);
-
     Object.keys(this.menus).forEach((key) => {
       const selObj = this.menus[key];
       const selectEl = this.shadowRoot.querySelector(`#${selObj.attribute}`);
@@ -224,35 +214,9 @@ class EnvPicker extends window.HTMLElement {
     widgetBox.append(newWidget);
   }
 
-  getSelect(menuKey) {
+  getSelectEl(menuKey) {
     const attribute = this.menus[menuKey].attribute;
     return this.shadowRoot.querySelector(`#${attribute}`);
-  }
-
-  async endpointListener(event) {
-    const newEndpoint = event.target.value;
-    const hostOptObjs = (await getHostOptions(newEndpoint)) || [];
-    this.menus.host.options = [this.menus.host.options[0], ...hostOptObjs];
-
-    const newOptsHtml = this.menus.host.options
-      .map((optObj) => optionHtml(optObj))
-      .join("\n");
-
-    this.removeSelectListener("host");
-    this.getSelect("host").innerHTML = newOptsHtml;
-    this.applySelectListener("host");
-
-    this.replaceWidget();
-  }
-
-  applyEndpointListener() {
-    const selectEl = this.getSelect("endpoint");
-    selectEl.addEventListener("change", this.endpointListener.bind(this));
-  }
-
-  removeEndpointListener() {
-    const selectEl = this.getSelect("endpoint");
-    selectEl.removeEventListener("change", this.endpointListener.bind(this));
   }
 
   selectListener() {
@@ -261,12 +225,12 @@ class EnvPicker extends window.HTMLElement {
 
   // Listen for changes to the <select> element in the ShadowRoot.
   applySelectListener(menuKey) {
-    const selectEl = this.getSelect(menuKey);
+    const selectEl = this.getSelectEl(menuKey);
     selectEl.addEventListener("change", this.selectListener.bind(this));
   }
 
   removeSelectListener(menuKey) {
-    const selectEl = this.getSelect(menuKey);
+    const selectEl = this.getSelectEl(menuKey);
     selectEl.removeEventListener("change", this.selectListener.bind(this));
   }
 }
