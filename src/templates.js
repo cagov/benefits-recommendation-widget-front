@@ -1,25 +1,77 @@
 export const css = /* css */ `
+:host {
+  --benefits-recs-title-font-size: 2rem;
+  --benefits-recs-tagline-font-size: 1.25rem;
+  --benefits-recs-lead-font-size: 1.4375rem;
+  --benefits-recs-catalyst-font-size: 1.25rem;
+  --benefits-recs-padding: 2rem;
+  --benefits-recs-gap: 1rem;
+  --benefits-recs-card-padding: 1.25rem;
+  --benefits-recs-card-gap: 1rem;
+  --benefits-recs-link-end-gap: 0.5rem;
+}
+
+@media (max-width: 500px) {
+  :host {
+    --benefits-recs-title-font-size: 1.5rem;
+    --benefits-recs-tagline-font-size: 0.9375rem;
+    --benefits-recs-lead-font-size: 1.125rem;
+    --benefits-recs-catalyst-font-size: 0.9375rem;
+    --benefits-recs-padding: 1.52rem;
+    --benefits-recs-gap: 0.76rem;
+    --benefits-recs-card-padding: 0.95rem;
+    --benefits-recs-card-gap: 0.76rem;
+    --benefits-recs-link-end-gap: 0.38rem;
+  }
+}
+
 section {
   background: #e1f1ee;
-  border-left: 3px solid #006c58;
-  margin: 1rem 0 0 0;
-  padding: 0 2rem 2rem 2rem;
-  display: inline-block;
-  width: 100%;
-  box-sizing: border-box;
+  border-left: 3px solid #006C58;
+  padding: var(--benefits-recs-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--benefits-recs-gap);
+  max-width: 46.875rem;
+  font-family: system-ui, sans-serif;
 }
 
 h2 {
-  color: #077e62;
+  font-size: var(--benefits-recs-title-font-size);
+  font-weight: 600;
+  color: #006C58;
+}
+
+.tagline {
+  font-size: var(--benefits-recs-tagline-font-size);
+}
+
+.lead {
+  font-size: var(--benefits-recs-lead-font-size);
+  font-weight: 700;
+}
+
+.catalyst {
+  font-size: var(--benefits-recs-catalyst-font-size);
+  text-align: right;
+  flex-grow: 2;
+}
+
+h2, .tagline {
+  margin: 0;
+}
+
+.tagline, .catalyst, .lead {
+  color: #000000;
 }
 
 ul.benefits {
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--benefits-recs-gap);
 }
 
 ul.benefits li {
@@ -27,12 +79,15 @@ ul.benefits li {
   background: #fff;
   flex-grow: 1;
   max-width: 100%;
+  border-radius: 0.3125rem
 }
 
 ul.benefits li a {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  padding: 1.2rem;
+  gap: var(--benefits-recs-card-gap);
+  padding: var(--benefits-recs-card-padding);
   text-decoration: none;
   color: #000;
 }
@@ -41,42 +96,21 @@ ul.benefits li a:hover {
   box-shadow: 0 0 23.3143px rgba(0, 0, 0, 0.25);
 }
 
-ul.benefits li .details {
+.link-start {
   display: flex;
-  min-width: 69%;
+  gap: var(--benefits-recs-card-gap);
   align-items: center;
 }
 
-ul.benefits li .details .svg {
-  margin-top: 0.3rem;
-}
-
-ul.benefits li .details .offer {
+.link-end {
   display: flex;
-  flex-flow: column;
-  margin-left: 1rem;
-}
-
-ul.benefits li .details .linktext {
-  font-weight: bold;
-}
-
-ul.benefits li .program-caret {
-  display: flex;
-  align-items: center;
-}
-
-ul.benefits li .program-caret .program {
-  font-weight: bold;
-  text-align: right;
-  margin-right: 0.3rem;
   flex-grow: 2;
+  align-items: center;
+  gap: var(--benefits-recs-link-end-gap);
 }
 
-@media (max-width: 500px) {
-  ul.benefits li a {
-    flex-flow: column;
-  }
+.link-icon, .open-icon {
+  display: inline-flex
 }
 `;
 
@@ -89,25 +123,29 @@ export const rootHtml = /* html */ `
 </section>
 `;
 
+export const openIcon = /* html */ `
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_1425_1913)">
+    <path d="M13.4696 5.88672V7.35634H16.1149L8.9138 14.5575L9.94253 15.5862L17.1437 8.38507V11.0304H18.6133V5.88672H13.4696ZM17.1437 17.6437H6.85634V7.35634H12V5.88672H6.85634C6.04805 5.88672 5.38672 6.54805 5.38672 7.35634V17.6437C5.38672 18.452 6.04805 19.1133 6.85634 19.1133H17.1437C17.952 19.1133 18.6133 18.452 18.6133 17.6437V12.5H17.1437V17.6437Z" fill="black"/>
+  </g>
+  <defs>
+    <clipPath id="clip0_1425_1913">
+      <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
+    </clipPath>
+  </defs>
+</svg>
+`;
+
 export const linkHtml = (link) => /* html */ `
 <li>
   <a href="${link.url}" target="_blank" rel="noopener noreferrer">
-    <span class="details">
-      <span class="svg">${link.graphic}</span>
-      <span class="offer">
-        <span class="linktext">${link.linktext}</span>
-        <span class="description">${link.description}</span>
-      </span>
+    <span class="link-start">
+      <span class="link-icon" aria-hidden="true">${link.graphic}</span>
+      <span class="lead">${link.lead}</span>
     </span>
-    <span class="program-caret">
-      <span class="program">
-        ${link.program}
-      </span>
-      <span class="caret">
-        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0.34999 11.147C0.64299 11.44 1.11799 11.44 1.40999 11.147L6.27399 6.28198C6.42099 6.13498 6.49499 5.94098 6.49299 5.74898C6.49299 5.55498 6.42099 5.36298 6.27399 5.21598L1.40999 0.350976C1.11699 0.0579756 0.64199 0.0579756 0.34999 0.350976C0.0579904 0.643976 0.0569904 1.11898 0.34999 1.41198L4.68699 5.74898L0.35099 10.086C0.0579898 10.379 0.0579898 10.854 0.35099 11.147H0.34999Z" fill="black"/>
-        </svg>
-      </span>
+    <span class="link-end">
+      <span class="catalyst">${link.catalyst}</span>
+      <span class="open-icon" aria-hidden="true">${openIcon}</span>
     </span>
   </a>
 </li>
