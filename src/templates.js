@@ -11,7 +11,7 @@ export const css = /* css */ `
   --benefits-recs-link-end-gap: 0.5rem;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 28.75rem) {
   :host {
     --benefits-recs-title-font-size: 1.5rem;
     --benefits-recs-tagline-font-size: 0.9375rem;
