@@ -62,7 +62,7 @@ export class CaGovBenefitsRecs extends window.HTMLElement {
 
           this.shadowRoot.querySelector("h2").innerHTML = data.header;
           this.shadowRoot.querySelector("p.tagline").innerHTML = data.tagline;
-          let listContainer = this.shadowRoot.querySelector("ul.benefits");
+          let listContainer = this.shadowRoot.querySelector("ul.link-list");
           data.links.forEach((link) => {
             listContainer.innerHTML += linkHtml(link);
           });

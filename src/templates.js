@@ -1,5 +1,10 @@
 export const css = /* css */ `
 :host {
+  --benefits-recs-background-color: #E1F1EE;
+  --benefits-recs-highlight-color: #006C58;
+  --benefits-recs-text-color: #000000;
+  --benefits-recs-card-background-color: #FFFFFF;
+
   --benefits-recs-title-font-size: 2rem;
   --benefits-recs-tagline-font-size: 1.25rem;
   --benefits-recs-lead-font-size: 1.4375rem;
@@ -26,8 +31,8 @@ export const css = /* css */ `
 }
 
 section {
-  background: #e1f1ee;
-  border-left: 3px solid #006C58;
+  background: var(--benefits-recs-background-color);
+  border-left: 3px solid var(--benefits-recs-highlight-color);
   padding: var(--benefits-recs-padding);
   display: flex;
   flex-direction: column;
@@ -39,7 +44,7 @@ section {
 h2 {
   font-size: var(--benefits-recs-title-font-size);
   font-weight: 600;
-  color: #006C58;
+  color: var(--benefits-recs-highlight-color);
 }
 
 .tagline {
@@ -62,10 +67,10 @@ h2, .tagline {
 }
 
 .tagline, .catalyst, .lead {
-  color: #000000;
+  color: var(--benefits-recs-text-color);
 }
 
-ul.benefits {
+ul.link-list {
   margin: 0;
   padding: 0;
   display: flex;
@@ -74,15 +79,15 @@ ul.benefits {
   gap: var(--benefits-recs-gap);
 }
 
-ul.benefits li {
+ul.link-list li {
   list-style: none;
-  background: #fff;
+  background: var(--benefits-recs-card-background-color);
   flex-grow: 1;
   max-width: 100%;
   border-radius: 0.3125rem
 }
 
-ul.benefits li a {
+ul.link-list li a {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -92,8 +97,8 @@ ul.benefits li a {
   color: #000;
 }
 
-ul.benefits li a:hover {
-  box-shadow: 0 0 23.3143px rgba(0, 0, 0, 0.25);
+ul.link-list li a:hover {
+  box-shadow: 0 0 0.75rem rgba(0, 0, 0, 0.25);
 }
 
 .link-start {
@@ -118,7 +123,7 @@ export const rootHtml = /* html */ `
 <section aria-label="benefits recommendations">
   <h2 part="header2">Claim more benefits</h2>
   <p class="tagline">You could qualify to get:</p>
-  <ul class="benefits">
+  <ul class="link-list">
   </ul>
 </section>
 `;
